@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>59 Questions</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#1f6fb8,#2b6cb0);color:white;padding:18px 24px}
+    .container{max-width:980px;margin:18px auto;padding:18px}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(20,20,40,0.06);padding:18px}
+    h1{margin:0 0 6px;font-size:20px}
+    p.lead{margin:6px 0 16px;color:#334155}
+    .question{padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eef2f7}
+    .qnum{font-weight:600;margin-bottom:6px}
+    .options{display:flex;gap:12px;flex-wrap:wrap}
+    label.opt{flex:1;min-width:150px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e6eef8;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#6b7280}
+    .result{margin-top:14px;padding:12px;border-radius:8px}
+    .correct{background:rgba(40,167,69,0.08);border:1px solid rgba(40,167,69,0.18);color:var(--correct)}
+    .wrong{background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.12);color:var(--wrong)}
+    .small{font-size:13px;color:#475569}
+    footer{max-width:980px;margin:20px auto;text-align:center;color:#64748b}
+    @media (max-width:700px){.options{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>TRẮC NGHIỆM BÀI 12</h1>
+      <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <form id="quizForm">
+        <div id="questions"></div>
+
+        <div class="controls">
+          <button type="button" id="submitBtn">Nộp bài</button>
+          <button type="button" id="resetBtn" class="secondary">Làm lại</button>
+          <div id="score" style="margin-left:auto"></div>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top:12px"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="small">BÀI 12: HOẠT ĐỘNG ĐỐI NGOẠI CỦA VIỆT NAM TỪ ĐẦU THẾ KỶ XX ĐẾN 1975</div>
+  </footer>
+
+  <script>
+const questionsData = [
+
+  {
+    id: 1,
+    q: "Một trong những địa điểm diễn ra các hoạt động đối ngoại của Phan Bội Châu là",
+    opts: {
+      A: "Nhật.",
+      B: "Anh.",
+      C: "Đức.",
+      D: "Ấn Độ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 2,
+    q: "Một trong những địa điểm diễn ra các hoạt động đối ngoại của Phan Châu Trinh là",
+    opts: {
+      A: "Pháp.",
+      B: "Ấn Độ.",
+      C: "Liên Xô.",
+      D: "Ba Lan."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 3,
+    q: "Năm 1908, Phan Bội Châu đã tham gia thành lập tổ chức nào sau đây?",
+    opts: {
+      A: "Hội liên hiệp thuộc địa.",
+      B: "Điền Quế Việt liên minh.",
+      C: "Mặt trận Việt-Miên-Lào.",
+      D: "Mặt trận Tổ quốc Việt Nam."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 4,
+    q: "Năm 1911, Phan Bội Châu đã trở về",
+    opts: {
+      A: "Việt Nam.",
+      B: "Liên Xô.",
+      C: "Trung Quốc.",
+      D: "Thái Lan."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 5,
+    q: "Một trong những địa điểm mà Nguyễn Ái Quốc thực hiện các hoạt động đối ngoại từ năm 1911 đến năm 1920 là",
+    opts: {
+      A: "Trung Quốc.",
+      B: "Liên Xô.",
+      C: "Thái Lan.",
+      D: "Pháp."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 6,
+    q: "Một trong những tổ chức được Nguyễn Ái Quốc thành lập khi ở nước ngoài giai đoạn từ năm 1911-1930 là",
+    opts: {
+      A: "Hội liên hiệp thuộc địa.",
+      B: "Điền Quế Việt liên minh.",
+      C: "Mặt trận Việt - Miên - Lào.",
+      D: "Mặt trận Tổ quốc Việt Nam."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 7,
+    q: "Trong giai đoạn từ năm 1923 đến năm 1927 Nguyễn Ái Quốc đã thực hiện các hoạt động đối ngoại ở đâu?",
+    opts: {
+      A: "Ấn Độ.",
+      B: "Liên Xô.",
+      C: "Thái Lan.",
+      D: "Tây Âu."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 8,
+    q: "Một trong những hoạt động đối ngoại của Đảng Cộng sản Đông Dương trong giai đoạn 1930 - 1945 là",
+    opts: {
+      A: "quyên góp giúp đỡ Nhân dân thế giới.",
+      B: "đưa bộ đội tình nguyện vào chiến đấu.",
+      C: "thành lập Mặt trận Tổ quốc các cấp.",
+      D: "gửi đơn xin gia nhập Hội quốc liên."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 9,
+    q: "Một trong những tổ chức được Đảng Cộng sản Đông Dương tích cực củng cố quan hệ trong giai đoạn 1930 - 1945 là",
+    opts: {
+      A: "Hội liên hiệp thuộc địa.",
+      B: "Đảng Cộng sản Trung Quốc.",
+      C: "Hội đồng tương trợ kinh tế.",
+      D: "Tổ chức phòng thủ Vác-sa-va."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 10,
+    q: "Đầu thế kỷ XX, nhân vật tiên phong tìm đến trào lưu dân chủ tư sản để cứu nước là",
+    opts: {
+      A: "Phan Bội Châu.",
+      B: "Nguyễn Ái Quốc.",
+      C: "Nguyễn Đức Cảnh.",
+      D: "Ngô Bội Phu."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 11,
+    q: "Phong trào nào sau đây được Phan Bội Châu tổ chức trong giai đoạn 1905 đến 1917?",
+    opts: {
+      A: "Tây học.",
+      B: "Cải cách.",
+      C: "Bạo động.",
+      D: "Đông Du."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 12,
+    q: "Một trong những tổ chức mà Nguyễn Ái Quốc đã gia nhập trong quá trình tìm đường cứu nước (1911 - 1941) là",
+    opts: {
+      A: "Đảng xã hội Pháp.",
+      B: "Đảng Bảo thủ Anh.",
+      C: "Đảng Cộng sản Đức.",
+      D: "Đảng Dân chủ Mỹ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 13,
+    q: "Người Cộng sản đầu tiên của dân tộc Việt Nam là",
+    opts: {
+      A: "Phan Bội Châu.",
+      B: "Nguyễn Ái Quốc.",
+      C: "Nguyễn Đức Cảnh.",
+      D: "Ngô Bội Phu."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 14,
+    q: "Năm 1919, Nguyễn Ái Quốc có hoạt động đối ngoại nào sau đây?",
+    opts: {
+      A: "Sang Liên Xô dự lễ tang Lênin, nghiên cứu chủ nghĩa Mác.",
+      B: "Tham dự Đại hội Tua, bỏ phiếu tán thành gia nhập Quốc tế Ba.",
+      C: "Gửi bản yêu sách của Nhân dân An Nam đến hội nghị Véc-xai.",
+      D: "Tham gia đoàn cố vấn cao cấp của Liên Xô đến Trung Quốc."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 15,
+    q: "Ngày 9/3/1945, diễn ra sự kiện",
+    opts: {
+      A: "Nhật tiến hành đảo chính Pháp.",
+      B: "Thời cơ của khởi nghĩa đã đến.",
+      C: "Giành chính quyền ở Hà Nội.",
+      D: "Vua Bảo Đại tuyên bố thoái vị."
+    },
+    answer: "A"
+  },
+  {
+    id: 16,
+    q: "Mục đích thực hiện các hoạt động đối ngoại của Phan Bội Châu là",
+    opts: {
+      A: "thiết lập chế độ quân chủ chuyên chế.",
+      B: "giành độc lập cho dân tộc Việt Nam.",
+      C: "cải cách kinh tế xã hội ở Việt Nam.",
+      D: "nhằm liên kết với cách mạng các nước."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 17,
+    q: "Từ năm 1905 đến năm 1917, các tổ chức mà Phan Bội Châu thành lập có mục đích nào sau đây?",
+    opts: {
+      A: "Vận động cải cách và duy tân.",
+      B: "Đề cải cách kinh tế, chính trị.",
+      D: "Nhằm lật độ chế độ phong kiến.",
+      C: "Chống lại Pháp giành độc lập."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 18,
+    q: "Mục đích thực hiện các hoạt động đối ngoại của Phan Chu Trinh là",
+    opts: {
+      A: "vận động cải cách và duy tân.",
+      B: "tiến hành khởi nghĩa vũ trang.",
+      C: "tập hợp lực lượng cách mạng.",
+      D: "xin viện trợ các nước châu Âu."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 19,
+    q: "Một trong những nội dung là mục đích của Nguyễn Tất Thành khi quyết định sang Pháp năm 1911",
+    opts: {
+      A: "nghiên cứu chủ nghĩa Mác-Lênin tìm đường cứu nước.",
+      B: "tạo mối liên kết giữa cách mạng Việt Nam và thế giới.",
+      C: "tìm hiểu về nước Pháp, sau đó trở về giúp đồng bào.",
+      D: "thành lập các tổ chức cách mạng, chuẩn bị khởi nghĩa."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 20,
+    q: "Vì sao năm 1924, Nguyễn Ái Quốc quyết định trở về Quảng Châu, Trung Quốc?",
+    opts: {
+      A: "Có nhiều người Việt Nam yêu nước.",
+      B: "Chính quyền Tưởng ở đây rất mạnh.",
+      C: "Do sự chỉ đạo của Quốc tế cộng sản.",
+      D: "Thành lập Đảng Cộng sản Việt Nam."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 21,
+    q: "Những hoạt động đối ngoại của Nguyễn Ái Quốc trong giai đoạn 1911 đến 1927 có ý nghĩa như thế nào đối với sự ra đời của Đảng Cộng sản Việt Nam?",
+    opts: {
+      A: "Sự đồng ý của Quốc tế cộng sản.",
+      B: "Chuẩn bị về tư tưởng và tổ chức.",
+      C: "Thống nhất các tổ chức cộng sản.",
+      D: "Chuẩn bị đợi thời cơ khởi nghĩa."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 22,
+    q: "Sự kiện nào sau đây đánh dấu Nguyễn Ái Quốc tìm ra con đường cứu nước, giải phóng cho dân tộc Việt Nam?",
+    opts: {
+      A: "Bỏ phiếu tán thành gia nhập Quốc tế ba (1920).",
+      B: "Gửi bản yêu sách của Nhân dân An Nam (1919).",
+      C: "Đọc được bản Luận cương của Lênin (1920).",
+      D: "Tham gia hợp nhất các tổ chức cộng sản (1930)."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 23,
+    q: "Những hoạt động đối ngoại của Hồ Chí Minh trong giai đoạn (1942-1945) có tác dụng như thế nào đối với cách mạng Việt Nam?",
+    opts: {
+      A: "Tranh thủ sự ủng hộ đối với cách mạng Việt Nam.",
+      B: "Tập hợp nông dân đứng dưới ngọn cờ của Đảng.",
+      C: "Thúc đẩy sự phát triển của phong trào công nhân.",
+      D: "Xu thế cách mạng vô sản đã thắng thế hoàn toàn."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 24,
+    q: "Những cuộc tiếp xúc giữa đại diện của Mặt trận Việt Minh với Mỹ từ sau ngày 9-3-1945 có tác dụng đối với cách mạng Việt Nam là",
+    opts: {
+      A: "Mỹ đã cung cấp một phần hậu cần.",
+      B: "nhận được sự công nhận từ bên ngoài.",
+      C: "đã chuẩn bị xây dựng khu giải phóng.",
+      D: "chính phủ tay sai Nhật hoang mang."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 25,
+    q: "Một trong những điểm giống nhau về kết quả trong các hoạt động đối ngoại của Phan Bội Châu và Phan Chu Trinh là",
+    opts: {
+      A: "đã thúc đẩy phong trào công nhân.",
+      B: "Pháp cho thực hiện nhiều cải cách.",
+      C: "đã nhận ra được bản chất kẻ thù.",
+      D: "chưa giành lại độc lập cho dân tộc."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 26,
+    q: "Một trong những điểm tương đồng trong các hoạt động đối ngoại của Nguyễn Ái Quốc và Phan Bội Châu là ở",
+    opts: {
+      A: "kết quả.",
+      B: "mục tiêu.",
+      C: "hướng đi.",
+      D: "nhận thức."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 27,
+    q: "Một trong những điểm khác trong các hoạt động đối ngoại của Nguyễn Ái Quốc và Phan Châu Trinh là",
+    opts: {
+      A: "mục tiêu.",
+      B: "mục đích.",
+      C: "đối tượng.",
+      D: "kết quả."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 28,
+    q: "Nguyễn Tất Thành nhận định về con đường cứu nước của Phan Bội Châu là “đưa hổ cửa trước, rước beo cửa sau” là đúng hay sai? Vì sao?",
+    opts: {
+      A: "Đúng, vì bản chất của các nước đế quốc là đi xâm lược thuộc địa.",
+      B: "Sai, vì Nhật Bản đã có sự giúp đỡ rất nhiều cho Phan Bội Châu.",
+      C: "Sai, Nhật Bản đã giúp đỡ Việt Nam giành lại độc lập năm 1945.",
+      D: "Đúng, vì năm 1939 Nhật đã tiến hành xâm lược Việt Nam."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 29,
+    q: "“Thất bại của cụ Phan Bội Châu và Phan Châu Trinh là do chưa nhận ra được bản chất của các nước đế quốc, thực dân”. Nhận định này đúng hay sai, vì sao?",
+    opts: {
+      A: "Đúng, vì Pháp - Nhật đã câu kết với nhau chống lại cách mạng Việt Nam.",
+      B: "Đúng, vì năm 1945 Nhật đã gây nạn đói khiến hai triệu đồng bào ta chết.",
+      C: "Sai, vì hai Cụ Phan chưa chuẩn bị được lực lượng, tiềm lực kinh tế yếu.",
+      D: "Sai, vì khuynh hướng cứu nước dân chủ tư sản không nhận được ủng hộ."
+    },
+    answer: "A"
+},
+  {
+    id: 30,
+    q: "Một trong những thuận lợi của nước Việt Nam dân chủ Cộng hòa sau Cách mạng tháng Tám (1945) là:",
+    opts: {
+      A: "nhân dân hăng hái ủng hộ cách mạng.",
+      B: "được sự công nhận của các cường quốc.",
+      C: "là thành viên của tổ chức Liên hợp quốc.",
+      D: "thực dân Pháp đã đầu hàng quân Nhật."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 31,
+    q: "Một trong những khó khăn của nước Việt Nam dân chủ Cộng hòa sau Cách mạng tháng Tám (1945) là",
+    opts: {
+      A: "phát xít Nhật chưa chấp nhận đầu hàng.",
+      B: "phải đối phó với thù trong và giặc ngoài.",
+      C: "hai mươi vạn quân Tưởng ở miền Nam.",
+      D: "Anh, Mỹ cho Pháp tiến quân ra miền Bắc."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 32,
+    q: "Năm 1945, một trong những hoạt động đối ngoại của nước Việt Nam Dân chủ Cộng hòa là",
+    opts: {
+      A: "gửi Công hàm đề nghị các nước lớn công nhận Việt Nam.",
+      B: "Chủ tịch Hồ Chí Minh đi thăm các nước xã hội chủ nghĩa.",
+      C: "Việt Nam cử đại biểu tham dự Đại hội Quốc tế cộng sản.",
+      D: "ký với đại diện của chính phủ Pháp bản Hiệp định Sơ-bộ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 33,
+    q: "Ngày 6-3-1946, Chính phủ nước Việt Nam Dân chủ Cộng hòa đã ký với đại diện của Chính phủ Pháp bản hiệp định nào sau đây?",
+    opts: {
+      A: "Bàn Môn Điếm.",
+      B: "Giơ-ne-vơ.",
+      C: "Hiệp định Pa-ri.",
+      D: "Hiệp định Sơ-bộ."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 34,
+    q: "Một trong những đối tượng của hoạt động đối ngoại mà nước Việt Nam Dân chủ Cộng hòa tiến hành từ sau Cách mạng tháng Tám (1945) là:",
+    opts: {
+      A: "Pháp.",
+      B: "Cuba.",
+      C: "Ai Cập.",
+      D: "Anh."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 35,
+    q: "Trong kháng chiến chống thực dân Pháp 1945 - 1954, nước Việt Nam Dân chủ Cộng hòa đã mở các cơ quan đại diện ở:",
+    opts: {
+      A: "châu Phi.",
+      B: "châu Mỹ.",
+      C: "châu Úc.",
+      D: "châu Á."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 36,
+    q: "Một trong những quốc gia mà nước Việt Nam Dân chủ Cộng hòa thiết lập quan hệ ngoại giao năm 1950 là",
+    opts: {
+      A: "Trung Quốc.",
+      B: "Ai Cập.",
+      C: "Cuba.",
+      D: "Ấn Độ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 37,
+    q: "Liên minh Việt - Miên - Lào (1951) là",
+    opts: {
+      A: "liên minh tự nguyện của ba nước Đông Dương.",
+      B: "tổ chức hợp tác kinh tế, chính trị Đông Dương.",
+      C: "liên minh quân sự của ba nước Đông Dương.",
+      D: "tổ chức hợp tác phát triển của Đông Dương."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 38,
+    q: "Hội nghị Giơ-ne-vơ (1954) được triệu tập để giải quyết vấn đề nào sau đây?",
+    opts: {
+      A: "Đông Đức.",
+      B: "Đông Dương.",
+      C: "Cam-pu-chia.",
+      D: "Trung Đông."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 39,
+    q: "Một trong những nhiệm vụ của hoạt động đối ngoại của Việt Nam trong giai đoạn 1965 - 1975 là",
+    opts: {
+      A: "đòi Mỹ, Diệm thi hành Hiệp định Pa-ri.",
+      B: "tố cáo tội ác của chiến tranh xâm lược.",
+      C: "đòi quyền tự do dân sinh và dân chủ.",
+      D: "bảo vệ các chủ quyền trên biển Đông."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 40,
+    q: "Nội dung nào sau đây là mục đích của các hoạt động đối ngoại mà nước Việt Nam Dân chủ Cộng hòa tiến hành trong giai đoạn 1954-1960?",
+    opts: {
+      A: "đòi Mỹ, Diệm thi hành Hiệp định Giơ-ne-vơ.",
+      B: "tố cáo tội ác của chính quyền Sài Gòn gây ra.",
+      C: "đấu tranh đòi quyền tự do dân sinh và dân chủ.",
+      D: "bảo vệ biên giới giữa hai miền là vĩ tuyến 17."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 41,
+    q: "Hội nghị Pa-ri (1969-1973) được tổ chức với mục đích nào sau đây?",
+    opts: {
+      A: "Chống lại âm mưu xâm lược bán đảo Đông Dương.",
+      B: "Thiết lập liên minh giữa các nước xã hội chủ nghĩa.",
+      C: "Tìm giải pháp kết thúc cuộc chiến tranh Việt Nam.",
+      D: "Thương lượng để kết thúc cuộc khủng hoảng tên lửa."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 42,
+    q: "Hiệp định Sơ-bộ (6/3/1946), Pháp đã công nhận Việt Nam là quốc gia",
+    opts: {
+      A: "độc lập.",
+      B: "tự do.",
+      C: "dân chủ.",
+      D: "dân quyền."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 43,
+    q: "Ngày 14/9/1946, Chủ tịch Hồ Chí Minh đã ký với Pháp văn kiện nào sau đây?",
+    opts: {
+      A: "Tạm ước.",
+      B: "Công ước.",
+      C: "Khế ước.",
+      D: "Hiệp ước."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 44,
+    q: "Một trong những nội dung của quyền dân tộc cơ bản là",
+    opts: {
+      A: "độc lập.",
+      B: "bình đẳng",
+      C: "hạnh phúc.",
+      D: "công bằng."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 45,
+    q: "Nội dung nào sau đây là mục đích của các hoạt động đối ngoại mà nước Việt Nam Dân chủ Cộng hòa tiến hành từ sau Cách mạng tháng Tám đến trước ngày 19/12/1946?",
+    opts: {
+      A: "Tranh thủ, tập trung phát triển kinh tế đất nước.",
+      B: "Xin gia nhập vào các tổ chức hòa bình quốc tế.",
+      C: "Yêu cầu các nước thiết lập quan hệ ngoại giao.",
+      D: "Để tránh một lúc phải đối phó với nhiều kẻ thù."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 46,
+    q: "Các hoạt động đối ngoại mà nước Việt Nam dân chủ Cộng hòa tiến hành từ sau Cách mạng tháng Tám phải tuân thủ nguyên tắc nào sau đây?",
+    opts: {
+      A: "Không vi phạm đến chủ quyền dân tộc.",
+      B: "Không nhân nhượng thòa hiệp với Pháp.",
+      C: "Nhân nhượng tất cả yêu cầu của Tưởng.",
+      D: "Giải quyết xung đột bằng thương lượng."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 47,
+    q: "Nội dung nào sau đây thể hiện mục đích của việc Chủ tịch Hồ Chí Minh ký với Pháp bản Tạm ước ngày 14/9/1946",
+    opts: {
+      A: "Kéo dài thời gian hòa bình để chuẩn bị kháng chiến.",
+      B: "Tranh thủ thời gian để điều động bộ đội từ Nam ra.",
+      C: "Đợi chi viện từ các nước xã hội chủ nghĩa anh em.",
+      D: "Tranh thủ khi lực lượng Pháp còn yếu để đàm phán."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 48,
+    q: "Thắng lợi nào sau đây đã buộc Mỹ đến Pa-ri đàm phán với Chính phủ nước Việt Nam Dân chủ Cộng hòa?",
+    opts: {
+      A: "Vạn Tường.",
+      B: "Đồng Xoài.",
+      C: "Mậu Thân.",
+      D: "Núi Thành."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 49,
+    q: "Thắng lợi nào sau đây đã buộc Mỹ phải chấp nhận ký Hiệp định Pa-ri?",
+    opts: {
+      A: "Điện Biên Phủ trên không",
+      B: "Tiến công chiến lược 1972.",
+      C: "Chiến dịch Huế - Đà Nẵng.",
+      D: "Chiến dịch Hồ Chí Minh."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 50,
+    q: "Các hoạt động đối ngoại thực hiện trong giai đoạn từ sau Cách mạng tháng Tám đến trước ngày 19/12/1946 có ý nghĩa như thế nào đối với cách mạng Việt Nam?",
+    opts: {
+      A: "Tạo điều kiện cho các chiến dịch quân sự diễn ra.",
+      B: "Tập hợp quần chúng đứng dưới ngọn cờ của Đảng.",
+      C: "Tranh thủ thời gian hòa hoãn để chờ sự chi viện.",
+      D: "Bảo vệ thành quả của Cách mạng tháng Tám năm 1945."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 51,
+    q: "Một trong những kết quả đem lại cho cách mạng Việt Nam từ việc ký Hiệp định Sơ bộ ngày 6/3/1946 là:",
+    opts: {
+      A: "đẩy hai mươi vạn quân Tưởng về nước.",
+      B: "Pháp còn ở Việt Nam mười ngàn quân.",
+      C: "Pháp công nhận độc lập cho Việt Nam.",
+      D: "các nước xã hội chủ nghĩa đã viện trợ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 52,
+    q: "Đâu là kết quả mà cách mạng Việt Nam đạt được khi ký Hiệp định Giơ-ne-vơ 1954?",
+    opts: {
+      A: "Thống nhất đất nước.",
+      B: "Miền Bắc giải phóng.",
+      C: "Miền Nam giải phóng.",
+      D: "Đánh bại đế quốc Mỹ."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 53,
+    q: "Đâu là kết quả mà cách mạng Việt Nam đạt được khi ký Hiệp định Pa-ri năm 1973?",
+    opts: {
+      A: "Đánh bại hoàn toàn đế quốc Mỹ.",
+      B: "So sánh lực lượng có lợi cho ta.",
+      C: "Thống nhất đất nước về lãnh thổ.",
+      D: "Nhận được sự viện trợ lớn từ Nhật."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 54,
+    q: "Sự kiện nào đây có ý nghĩa là bước ngoặt mới đối với cuộc kháng chiến chống Mỹ, cứu nước 1954-1975 của Nhân dân Việt Nam?",
+    opts: {
+      A: "Hội nghị cấp cao ba nước Đông Dương.",
+      B: "Cuộc tiến công chiến lược năm 1972.",
+      C: "Hiệp định Pa-ri được ký kết năm 1973.",
+      D: "Chiến thắng Lam Sơn 719 năm 1971."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 55,
+    q: "Nội dung nào sau đây là điểm giống nhau cơ bản giữa Hiệp định Giơ-ne-vơ (1954) và Hiệp định Pa-ri (1973)?",
+    opts: {
+      A: "Đều buộc các nước đế quốc chấm dứt chiến tranh xâm lược và rút hết quân về nước.",
+      B: "Là văn bản pháp lý quốc tế ghi nhận các quyền tự do cơ bản của Nhân dân Việt Nam.",
+      C: "Các bên thừa nhận trên thực tế miền Nam Việt Nam có hai chính quyền, hai quân đội.",
+      D: "Thỏa thuận các bên ngừng bắn thực hiện chuyển quân, tập kết, chuyển giao khu vực."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 56,
+    q: "Một trong những nguyên tắc cơ bản, quan trọng để đàm phán đi đến ký kết Hiệp định Sơ-bộ 1946, Hiệp định Giơ-ne-vơ 1954 và Hiệp định Pa-ri 1973 là:",
+    opts: {
+      A: "tôn trọng quyền dân tộc cơ bản của Việt Nam.",
+      B: "phạm vi đóng quân chia thành vùng riêng biệt.",
+      C: "các bên tham chiến phải nhanh chóng rút quân.",
+      D: "không được sử dụng các loại vũ khí hủy diệt."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 57,
+    q: "Từ thắng lợi của Việt Nam trong Hội nghị Pa-ri (1973), Đảng đã rút ra bài học kinh nghiệm gì cho đường lối ngoại giao hiện nay?",
+    opts: {
+      A: "Thực hiện đường lối ngoại giao độc lập, tự chủ.",
+      B: "Tranh thủ tối đa sự ủng hộ của các cường quốc.",
+      C: "Giải quyết tranh chấp bằng biện pháp hòa bình.",
+      D: "Đa dạng hóa, đa phương hóa quan hệ quốc tế."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 58,
+    q: "Nội dung nào sau đây là hạn chế trong Hiệp định Giơ-ne-vơ 1954 đã được khắc phục trong Hiệp định Pa-ri 1973?",
+    opts: {
+      A: "Chuyển quân, tập kết.",
+      B: "Ba lực lượng chính trị.",
+      C: "Hai vùng kiểm soát.",
+      D: "Giám sát quốc tế."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 59,
+    q: "Nhận xét nào sau đây đối với Hiệp định Pa-ri (1973) về chấm dứt chiến tranh, lập lại hòa bình ở Việt Nam là đúng?",
+    opts: {
+      A: "Kết quả của cuộc đấu tranh ngoại giao dài nhất, khó khăn nhất.",
+      B: "Thắng lợi chung của khối xã hội chủ nghĩa trước âm mưu của Mỹ.",
+      C: "Hiệp định đầu tiên ghi nhận quyền dân tộc cơ bản của Việt Nam.",
+      D: "Là thời cơ trực tiếp để Nhân dân ta tiến lên giải phóng miền Nam."
+    },
+    answer: "D"
+  }];
+  
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+shuffleArray(questionsData);
+
+const container = document.getElementById('questions');
+
+questionsData.forEach((item, index) => {
+  const qNumber = index + 1;
+
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.id = 'q' + qNumber;
+
+  div.innerHTML = `
+    <div class="qnum">Câu ${qNumber}:</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options">
+      ${Object.entries(item.opts).map(([key, val]) => `
+        <label class="opt">
+          <input type="radio" name="q${qNumber}" value="${key}">
+          <strong>${key}.</strong> ${val}
+        </label>
+      `).join('')}
+    </div>
+  `;
+
+  container.appendChild(div);
+});
+
+
+  // grading logic
+  const submitBtn = document.getElementById('submitBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const scoreDiv = document.getElementById('score');
+  const feedbackDiv = document.getElementById('feedback');
+
+  submitBtn.addEventListener('click', ()=>{
+  let correctCount = 0;
+  let total = questionsData.length;
+
+  for(let i=0;i<total;i++){
+    const qNumber = i + 1;
+    const selected = document.querySelector(`input[name="q${qNumber}"]:checked`);
+    const qDiv = document.getElementById('q'+qNumber);
+
+    qDiv.classList.remove('correct','wrong');
+    const old = qDiv.querySelector('.note'); if(old) old.remove();
+
+    const note = document.createElement('div');
+    note.className = 'note small';
+
+    if(!selected){
+      note.textContent = '(Chưa trả lời)';
+      qDiv.appendChild(note);
+      continue;
+    }
+
+    if(selected.value === questionsData[i].answer){
+      correctCount++;
+      qDiv.classList.add('correct');
+      note.textContent = `Đúng — đáp án: ${questionsData[i].answer}`;
+    } else {
+      qDiv.classList.add('wrong');
+      note.textContent = `Sai — đáp án đúng: ${questionsData[i].answer}`;
+    }
+
+    qDiv.appendChild(note);
+  }
+
+  scoreDiv.innerHTML = `<strong>Kết quả: ${correctCount}/${total}</strong>`;
+  submitBtn.disabled = true;
+});
+
+  resetBtn.addEventListener('click', ()=>{
+    document.getElementById('quizForm').reset();
+    // clear highlights/notes
+    for(let i=1;i<=questionsData.length;i++){
+      const qDiv = document.getElementById('q'+i);
+      qDiv.classList.remove('correct','wrong');
+      const note = qDiv.querySelector('.note'); if(note) note.remove();
+      const un = qDiv.querySelector('.small'); if(un) un.remove();
+    }
+    scoreDiv.innerHTML='';
+    feedbackDiv.innerHTML='';
+    submitBtn.disabled = false;
+  });
+  </script>
+</body>
+</html>

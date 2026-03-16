@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>30 Questions</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#1f6fb8,#2b6cb0);color:white;padding:18px 24px}
+    .container{max-width:980px;margin:18px auto;padding:18px}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(20,20,40,0.06);padding:18px}
+    h1{margin:0 0 6px;font-size:20px}
+    p.lead{margin:6px 0 16px;color:#334155}
+    .question{padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eef2f7}
+    .qnum{font-weight:600;margin-bottom:6px}
+    .options{display:flex;gap:12px;flex-wrap:wrap}
+    label.opt{flex:1;min-width:150px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e6eef8;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#6b7280}
+    .result{margin-top:14px;padding:12px;border-radius:8px}
+    .correct{background:rgba(40,167,69,0.08);border:1px solid rgba(40,167,69,0.18);color:var(--correct)}
+    .wrong{background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.12);color:var(--wrong)}
+    .small{font-size:13px;color:#475569}
+    footer{max-width:980px;margin:20px auto;text-align:center;color:#64748b}
+    @media (max-width:700px){.options{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>TRẮC NGHIỆM BÀI 13</h1>
+      <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <form id="quizForm">
+        <div id="questions"></div>
+
+        <div class="controls">
+          <button type="button" id="submitBtn">Nộp bài</button>
+          <button type="button" id="resetBtn" class="secondary">Làm lại</button>
+          <div id="score" style="margin-left:auto"></div>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top:12px"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="small">BÀI 13: HOẠT ĐỘNG ĐỐI NGOẠI CỦA VIỆT NAM TỪ NĂM 1975 ĐỀN NAY</div>
+  </footer>
+
+  <script>
+const questionsData = [
+  {
+    id: 1,
+    q: "Một trong những quốc gia mà Việt Nam rất coi trọng quan hệ và hợp tác chặt chẽ trong giai đoạn 1975 - 1985 là:",
+    opts: {
+      A: "Trung Quốc.",
+      B: "Liên Xô.",
+      C: "Nhật Bản.",
+      D: "Hàn Quốc."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 2,
+    q: "Năm 1978, Việt Nam gia nhập tổ chức nào sau đây?",
+    opts: {
+      A: "SEV.",
+      B: "EU.",
+      C: "ASEAN.",
+      D: "NATO."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 3,
+    q: "Một trong những hoạt động đối ngoại của Việt Nam đối với Trung Quốc trong giai đoạn 1975 - 1985 là:",
+    opts: {
+      A: "đàm phán giải quyết vấn đề xung đột biên giới.",
+      B: "hội nghị thượng đỉnh bàn về vấn đề của ASEAN.",
+      C: "đàm phán về việc khai thác chung nguồn khí đốt.",
+      D: "thương lượng để Trung Quốc tăng cường viện trợ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 4,
+    q: "Từ năm 1975 - 1985, các hoạt động đối ngoại của Việt Nam chú trọng phát triển quan hệ hữu nghị với quốc gia nào sau đây?",
+    opts: {
+      A: "Malaysia.",
+      B: "Brunây.",
+      C: "Thái Lan.",
+      D: "Lào."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 5,
+    q: "Từ năm 1975 - 1985, các hoạt động đối ngoại của Việt Nam tập trung chống lại",
+    opts: {
+      A: "âm mưu chia cắt Đông Dương.",
+      B: "cuộc tấn công của Trung Quốc.",
+      C: "cuộc bao vây cấm vận của Mỹ.",
+      D: "âm mưu chia rẽ tổ chức ASEAN."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 6,
+    q: "Trong giai đoạn 1975 đến 1985 Việt Nam đã tham gia",
+    opts: {
+      A: "Phong trào không liên kết.",
+      B: "Cộng đồng văn hóa ASEAN .",
+      C: "Hiệp hội các quốc gia độc lập.",
+      D: "Cộng đồng kinh tế ASEAN."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 7,
+    q: "Nội dung định hướng chung cho hoạt động động đối ngoại là “Hợp tác bình đẳng cùng có lợi với tất cả các nước, không phân biệt chế độ chính trị...”. Được Đại hội lần thứ mấy của Đảng đề ra?",
+    opts: {
+      A: "IV.",
+      B: "VI.",
+      C: "VII.",
+      D: "XI"
+    },
+    answer: "A"
+  },
+
+  {
+    id: 8,
+    q: "Một trong những quốc gia Việt Nam đã bình thường hóa quan hệ ngoại giao từ sau 1986 đến nay là",
+    opts: {
+      A: "Mỹ.",
+      B: "Ấn Độ.",
+      C: "Nga.",
+      D: "Lào."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 9,
+    q: "Một trong những quốc gia Việt Nam đã bình thường hóa quan hệ ngoại giao từ sau năm 1986 đến nay là",
+    opts: {
+      A: "Trung Quốc.",
+      B: "Mông Cổ.",
+      C: "Liên Xô.",
+      D: "Triều Tiên."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 10,
+    q: "Sự kiện nào sau đây đánh dấu quan hệ giữa Việt Nam với các nước trên thế giới được cải thiện, mở rộng?",
+    opts: {
+      A: "Miền Nam được giải phóng.",
+      B: "Bắt đầu công cuộc đổi mới.",
+      C: "Gia nhập vào Liên hợp quốc.",
+      D: "Tham gia cộng đồng ASEAN."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 11,
+    q: "Một trong những tổ chức Việt Nam đã gia nhập từ sau năm 1986 đến nay là",
+    opts: {
+      A: "SEV.",
+      B: "NATO.",
+      C: "ASEAN.",
+      D: "SEATO."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 12,
+    q: "Đến năm 2022, Việt Nam đã là thành viên của bao nhiêu tổ chức, diễn đàn khu vực và quốc tế?",
+    opts: {
+      A: "59.",
+      B: "60.",
+      C: "62.",
+      D: "63."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 13,
+    q: "Một trong các hội nghị quốc tế quan trọng mà Việt Nam đã tổ chức thành công là",
+    opts: {
+      A: "APEC.",
+      B: "COP28.",
+      C: "ICEC.",
+      D: "OPEC."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 14,
+    q: "Từ năm 1986 đến nay, Việt Nam đã ký các hiệp ước về biên giới trên đất liền với quốc gia nào sau đây?",
+    opts: {
+      A: "Trung Quốc.",
+      B: "Hàn Quốc.",
+      C: "Liên Xô.",
+      D: "Triều Tiên."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 15,
+    q: "Một trong những những hoạt động hỗ trợ nhân đạo của Việt Nam được thực hiện ở",
+    opts: {
+      A: "Mỹ.",
+      B: "Đức.",
+      C: "Anh.",
+      D: "Cuba."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 16,
+    q: "Sự kiện nào sau đây đã tạo điều kiện thuận lợi cho các hoạt động đối ngoại của Việt Nam trong giai đoạn mới từ năm 1975 đến nay?",
+    opts: {
+      A: "Miền Nam được giải phóng.",
+      B: "Bắt đầu công cuộc đồi mới.",
+      C: "Gia nhập vào Liên hợp quốc.",
+      D: "Tham gia cộng đồng ASEAN."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 17,
+    q: "Một trong những nguyên nhân Việt Nam luôn coi trọng mối quan hệ và hợp tác với Liên Xô là",
+    opts: {
+      A: "viện trợ kinh tế, quân sự, ủng hộ về chính trị.",
+      B: "đồng ý đứng dưới cái ô hạt nhân của Liên Xô.",
+      C: "cần liên kết với Liên Xô để chống Trung Quốc.",
+      D: "dựa vào ưu thế của Liên Xô để đánh Khơ-me đỏ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 18,
+    q: "Một trong những nguyên nhân đề Việt Nam phát trong quan hệ hữu nghị đoàn kết với Lào là",
+    opts: {
+      A: "truyền thống lịch sử đấu tranh chống kẻ thù xâm lược.",
+      B: "đường biên giới trên biển và trên bộ dài gần 3.000km.",
+      C: "có kẻ thù chung và cùng chống lại âm mưu bá quyền.",
+      D: "sự hợp tác trên sông Mê-kong để bảo vệ nông nghiệp."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 19,
+    q: "Trở ngại lớn nhất trong việc Việt Nam hội nhập với Đông Nam Á trong giai đoạn từ năm 1975-1991 là",
+    opts: {
+      A: "quân đội quá lớn mạnh.",
+      B: "vấn đề của Cam-pu-chia.",
+      C: "Trung Quốc ngăn cản.",
+      D: "Việt Nam còn lạc hậu."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 20,
+    q: "Tính đến tháng 3-2024, Việt Nam có mối quan hệ “Đối tác chiến lược toàn diện” với bao nhiêu quốc gia?",
+    opts: {
+      A: "5.",
+      B: "6.",
+      C: "7.",
+      D: "8."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 21,
+    q: "Một trong những quốc gia có mối quan hệ “Đối tác chiến lược toàn diện” với Việt Nam tính đến tháng 3-2024 là",
+    opts: {
+      A: "Mỹ.",
+      B: "Đức",
+      C: "Anh.",
+      D: "Cuba."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 22,
+    q: "Một trong những thành tựu to lớn của các hoạt động đối ngoại đem lại cho Việt Nam từ năm 1986 đến nay là",
+    opts: {
+      A: "sự ủng hộ, những viện trợ quân sự to lớn đến từ Nga.",
+      B: "vị thế, uy tín của Việt Nam ngày càng được nâng cao.",
+      C: "đã có hơn mười nước là đối tác chiến lược toàn diện.",
+      D: "đang ứng cử ghế ủy viên thường trực Hội đồng bản an."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 23,
+    q: "Một trong các cơ hội khi Việt Nam tham gia vào các tổ chức quốc tế, khu vực là",
+    opts: {
+      A: "tiếp cận được nguồn vốn đầu tư từ các nước lớn.",
+      B: "có thể tham gia vào các khối liên minh quân sự.",
+      C: "tiếp cận được nguồn lao động giá rẻ ở châu Âu.",
+      D: "liên minh với Mỹ giải quyết vấn đề biển Đông."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 24,
+    q: "Một trong những thách thức khi Việt Nam tham gia các tổ chức quốc tế, khu vực là",
+    opts: {
+      A: "nguy cơ đánh mất bản sắc văn hóa dân tộc.",
+      B: "gây mâu thuẫn sâu sắc hơn trên biển Đông.",
+      C: "nguồn lao động giá rẻ châu Âu cạnh tranh.",
+      D: "bị ép tham gia các khối liên minh quân sự."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 25,
+    q: "Để thực hiện thành công phương châm “Việt Nam muốn làm bạn với tất cả các nước”. Các hoạt động đối ngoại cần tuân thủ nguyên tắc nào sau đây?",
+    opts: {
+      A: "Liên kết với các nước Đông Âu cũ.",
+      B: "Cân bằng mối quan hệ giữa hai cực.",
+      C: "Không vi phạm chủ quyền dân tộc.",
+      D: "Không đổi môi trường lấy kinh tế."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 26,
+    q: "Một trong những nội dung thể hiện sự khác nhau giữa các hoạt động đối ngoại từ năm 1945 - 1975 và từ năm 1986 đến nay là",
+    opts: {
+      A: "mục tiêu đấu tranh là giải phóng dân tộc.",
+      B: "nguyên tắc thực hiện hoạt động đối ngoại.",
+      C: "các chuyến thăm cấp cao đến Trung Quốc.",
+      D: "đặt dưới sự lãnh đạo tuyệt đối của Đảng."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 27,
+    q: "Một trong những nội dung thể hiện sự giống nhau giữa các hoạt động đối ngoại từ năm 1945 - 1975 và từ năm 1986 đến nay là",
+    opts: {
+      A: "mục tiêu đấu tranh giải phóng dân tộc.",
+      B: "kết hợp chặt chẽ với đầu tranh quân sự.",
+      C: "phục vụ lợi ích cho dân tộc Việt Nam.",
+      D: "liên kết chặt chẽ với các nước Đông Âu."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 28,
+    q: "Một trong những thuận lợi của các hoạt động đối ngoại từ năm 1986 đến nay so với các giai đoạn trước đó là",
+    opts: {
+      A: "vị thế của Việt Nam ngày càng được nâng cao.",
+      B: "kẻ thù trực tiếp của chúng ta đã trở nên suy yếu.",
+      C: "đã khai thông được tuyến biên giới Việt - Trung.",
+      D: "mâu thuẫn giữa các nước lớn đã được xóa bỏ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 29,
+    q: "Nhận xét nào sau đây về vai trò của các hoạt động đối ngoại từ năm 1986 đến nay là đúng?",
+    opts: {
+      A: "Tạo ra ưu thế cho các tranh chấp quân sự trên biển Đông.",
+      B: "Tất cả các nước nâng tầm quan hệ ngoại giao với Việt Nam.",
+      C: "Đã đưa Việt Nam trở thành cường quốc số một châu Á.",
+      D: "Tạo điều kiện cho Việt Nam hội nhập, phát triển kinh tế."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 30,
+    q: "Bài học kinh nghiệm xuyên suốt đã dẫn đến tất cả những thắng lợi trong quá trình thực hiện các hoạt động đối ngoại từ năm 1945 đến nay là",
+    opts: {
+      A: "kiên trì sự lãnh đạo tuyệt đối của Đảng.",
+      B: "tăng cường củng cố sức mạnh quân sự.",
+      C: "thực hiện đoàn kết chặt chẽ với Liên Xô.",
+      D: "tham gia vào các khối liên minh quân sự."
+    },
+    answer: "A"
+  }];
+  
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+shuffleArray(questionsData);
+
+const container = document.getElementById('questions');
+
+questionsData.forEach((item, index) => {
+  const qNumber = index + 1;
+
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.id = 'q' + qNumber;
+
+  div.innerHTML = `
+    <div class="qnum">Câu ${qNumber}:</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options">
+      ${Object.entries(item.opts).map(([key, val]) => `
+        <label class="opt">
+          <input type="radio" name="q${qNumber}" value="${key}">
+          <strong>${key}.</strong> ${val}
+        </label>
+      `).join('')}
+    </div>
+  `;
+
+  container.appendChild(div);
+});
+
+
+  // grading logic
+  const submitBtn = document.getElementById('submitBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const scoreDiv = document.getElementById('score');
+  const feedbackDiv = document.getElementById('feedback');
+
+  submitBtn.addEventListener('click', ()=>{
+  let correctCount = 0;
+  let total = questionsData.length;
+
+  for(let i=0;i<total;i++){
+    const qNumber = i + 1;
+    const selected = document.querySelector(`input[name="q${qNumber}"]:checked`);
+    const qDiv = document.getElementById('q'+qNumber);
+
+    qDiv.classList.remove('correct','wrong');
+    const old = qDiv.querySelector('.note'); if(old) old.remove();
+
+    const note = document.createElement('div');
+    note.className = 'note small';
+
+    if(!selected){
+      note.textContent = '(Chưa trả lời)';
+      qDiv.appendChild(note);
+      continue;
+    }
+
+    if(selected.value === questionsData[i].answer){
+      correctCount++;
+      qDiv.classList.add('correct');
+      note.textContent = `Đúng — đáp án: ${questionsData[i].answer}`;
+    } else {
+      qDiv.classList.add('wrong');
+      note.textContent = `Sai — đáp án đúng: ${questionsData[i].answer}`;
+    }
+
+    qDiv.appendChild(note);
+  }
+
+  scoreDiv.innerHTML = `<strong>Kết quả: ${correctCount}/${total}</strong>`;
+  submitBtn.disabled = true;
+});
+
+  resetBtn.addEventListener('click', ()=>{
+    document.getElementById('quizForm').reset();
+    // clear highlights/notes
+    for(let i=1;i<=questionsData.length;i++){
+      const qDiv = document.getElementById('q'+i);
+      qDiv.classList.remove('correct','wrong');
+      const note = qDiv.querySelector('.note'); if(note) note.remove();
+      const un = qDiv.querySelector('.small'); if(un) un.remove();
+    }
+    scoreDiv.innerHTML='';
+    feedbackDiv.innerHTML='';
+    submitBtn.disabled = false;
+  });
+  </script>
+</body>
+</html>

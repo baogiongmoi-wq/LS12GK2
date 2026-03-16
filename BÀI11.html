@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>28 Questions</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#1f6fb8,#2b6cb0);color:white;padding:18px 24px}
+    .container{max-width:980px;margin:18px auto;padding:18px}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(20,20,40,0.06);padding:18px}
+    h1{margin:0 0 6px;font-size:20px}
+    p.lead{margin:6px 0 16px;color:#334155}
+    .question{padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eef2f7}
+    .qnum{font-weight:600;margin-bottom:6px}
+    .options{display:flex;gap:12px;flex-wrap:wrap}
+    label.opt{flex:1;min-width:150px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e6eef8;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#6b7280}
+    .result{margin-top:14px;padding:12px;border-radius:8px}
+    .correct{background:rgba(40,167,69,0.08);border:1px solid rgba(40,167,69,0.18);color:var(--correct)}
+    .wrong{background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.12);color:var(--wrong)}
+    .small{font-size:13px;color:#475569}
+    footer{max-width:980px;margin:20px auto;text-align:center;color:#64748b}
+    @media (max-width:700px){.options{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>TRẮC NGHIỆM BÀI 11</h1>
+      <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <form id="quizForm">
+        <div id="questions"></div>
+
+        <div class="controls">
+          <button type="button" id="submitBtn">Nộp bài</button>
+          <button type="button" id="resetBtn" class="secondary">Làm lại</button>
+          <div id="score" style="margin-left:auto"></div>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top:12px"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="small">BÀI 11: THÀNH TỰU CƠ BẢN VÀ BÀI HỌC CỦA CÔNG CUỘC ĐỔI MỚI
+Ở VIỆT NAM TỪ NĂM 1986 ĐẾN NAY</div>
+  </footer>
+
+  <script>
+const questionsData = [
+
+  {
+    id: 1,
+    q: "Một trong những nội dung thể hiện việc đổi mới tư duy chính trị của Đảng Cộng sản Việt Nam từ năm 1986 đến nay là gì?",
+    opts: {
+      A: "Nhận thức rõ ràng hơn về tình hình thế giới.",
+      B: "Kiên định con đường đi lên chủ nghĩa xã hội.",
+      C: "Lấy tư tưởng Hồ Chí Minh làm kim chỉ nam.",
+      D: "Xác định việc đổi mới kinh tế làm trọng tâm."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 2,
+    q: "Mối quan hệ của Đảng, Nhà nước với Nhân dân ngày càng được tăng cường theo quy định của",
+    opts: {
+      A: "Tư pháp.",
+      B: "Hiến pháp.",
+      C: "Hành pháp.",
+      D: "Lập pháp."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 3,
+    q: "Từ sau năm 1986, bộ máy Nhà nước được sắp xếp theo hướng",
+    opts: {
+      A: "năm tham gia công tác.",
+      B: "giảm tiền lương tối đa.",
+      C: "tinh gọn và hiệu quả.",
+      D: "đơn giản và hiệu quả."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 4,
+    q: "Dưới tác động của công cuộc Đổi mới, nền kinh tế Việt Nam vận hành theo định hướng",
+    opts: {
+      A: "thị trường.",
+      B: "quan liêu.",
+      C: "bao cấp.",
+      D: "tư doanh."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 5,
+    q: "Một trong những thành phần kinh tế mới được phép hoạt động từ sau khi đường lối đổi mới được thực thi là",
+    opts: {
+      A: "có vốn đầu tư nước ngoài.",
+      B: "kinh tế nhà nước quản lý.",
+      C: "kinh tế tập thể, hợp tác xã.",
+      D: "kinh tế cá thể, hộ gia đình."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 6,
+    q: "Thành phần kinh tế nào sau đây giữ vai trò chủ đạo trong nền kinh tế Việt Nam?",
+    opts: {
+      A: "Tư nhân.",
+      B: "Nhà nước.",
+      C: "Cá thể.",
+      D: "Nước ngoài."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 7,
+    q: "Một trong những thành tựu của công cuộc Đổi mới về xã hội là",
+    opts: {
+      A: "xóa bỏ hố sâu phân cách giàu nghèo trên cả nước.",
+      B: "đã xóa bỏ hoàn toàn các mâu thuẫn trong xã hội.",
+      C: "chấp nhận, cho phép tự do thành lập các Đảng.",
+      D: "những nhu cầu thiết yếu được đáp ứng tốt hơn."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 8,
+    q: "Một trong những thành tựu mà giáo dục Việt Nam đạt được vào năm 2000 là",
+    opts: {
+      A: "phổ cập giáo dục tiểu học.",
+      B: "phổ cập trung học cơ sở.",
+      C: "đứng đầu thế giới về Toán.",
+      D: "hoàn thành phổ cập đại học."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 9,
+    q: "Một trong những thành tựu mà giáo dục Việt Nam đạt được vào năm 2010 là",
+    opts: {
+      A: "phổ cập giáo dục tiểu học.",
+      B: "phổ cập trung học cơ sở.",
+      C: "đứng đầu thế giới về Văn.",
+      D: "đạt nhiều giải Noben nhất."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 10,
+    q: "Tính đến năm 2020, so sánh trong khối ASEAN nền kinh tế Việt Nam xếp thứ",
+    opts: {
+      A: "2.",
+      B: "3.",
+      C: "5.",
+      D: "4."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 11,
+    q: "Trong giai đoạn từ năm 1986-1995, cán cân kinh tế Việt Nam có sự dịch chuyển theo hướng từ nhập siêu sang",
+    opts: {
+      A: "xuất siêu.",
+      B: "phát triển.",
+      C: "khủng hoảng.",
+      D: "tái thiết."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 12,
+    q: "Tính đến năm 2023, Việt Nam đã thiết lập quan hệ ngoại giao với bao nhiêu quốc gia và vùng lãnh thổ trên thế giới?",
+    opts: {
+      A: "191.",
+      B: "195.",
+      C: "193.",
+      D: "196."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 13,
+    q: "Tính đến năm 2022, Việt Nam đã có bao nhiêu đối tác chiến lược?",
+    opts: {
+      A: "19.",
+      B: "95.",
+      C: "30.",
+      D: "16."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 14,
+    q: "Một trong những thành tựu của công cuộc Đổi mới đất nước từ năm 1986 đến nay là:",
+    opts: {
+      A: "đưa đất nước thoát khỏi khủng hoảng.",
+      B: "trở thành cường quốc số 1 của châu Á.",
+      C: "xóa thành công tình trạng tham nhũng.",
+      D: "100% công nhân có được bằng đại học."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 15,
+    q: "Một trong những thành tựu về đổi mới Chính trị, An ninh - Quốc phòng là",
+    opts: {
+      A: "xây dựng thành công hạm đội tàu sân bay mạnh nhất châu Á.",
+      B: "xây dựng Nhà nước pháp quyền xã hội chủ nghĩa vững mạnh.",
+      C: "tham gia đầy đủ vào các tổ chức quân sự quốc tế và khu vực.",
+      D: "trở thành ủy viên thường trực hội đồng bảo an Liên hợp quốc."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 16,
+    q: "Một trong những nguyên tắc hàng đầu đặt ra cho công cuộc Đổi mới đất nước từ năm 1986 đến nay là:",
+    opts: {
+      A: "kiên định con đường xã hội chủ nghĩa.",
+      B: "không tiến hành mua các loại vũ khí.",
+      C: "tránh xung đột quân sự trên biển Đông.",
+      D: "gia nhập các tổ chức liên kết kinh tế."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 17,
+    q: "Đảng Cộng sản Việt Nam đã làm gì để đưa đất nước thoát khỏi tình trạng khủng hoảng trầm trọng về kinh tế - xã hội?",
+    opts: {
+      A: "Tiến hành tập thể hóa nông, công nghiệp.",
+      B: "Gia nhập vào hội đồng tương trợ kinh tế.",
+      C: "Tiến hành công cuộc Đổi mới đất nước.",
+      D: "Tiến hành chiến tranh biên giới Tây Nam."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 18,
+    q: "Một trong những kết quả mà đổi mới về chính trị, an ninh - quốc phòng đem lại cho Việt Nam là",
+    opts: {
+      A: "giữ vững sự ổn định chính trị.",
+      B: "trở thành cường quốc quân sự.",
+      C: "giành lại thành công Hoàng Sa.",
+      D: "ngân sách quốc phòng tăng lên."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 19,
+    q: "Đâu là bài học kinh nghiệm xuyên suốt trong lịch sử đã đem lại thành công cho công cuộc đổi mới từ năm 1986 đến nay?",
+    opts: {
+      A: "Đặt lợi ích của Nhân dân lên hàng đầu.",
+      B: "Kiên trì lãnh đạo tuyệt đối của Đảng.",
+      C: "Tận dụng các cơ hội đến từ bên ngoài.",
+      D: "Tiến hành đổi mới toàn diện, đồng bộ."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 20,
+    q: "Một trong những tác động tích cực mà quá trình hội nhập kinh tế quốc tế đem đến cho Việt Nam là",
+    opts: {
+      A: "nhận chuyển giao công nghệ miễn phí.",
+      B: "được miễn thuế khi bán hàng nông sản.",
+      C: "dễ dàng tiếp cận với nguồn vốn đầu tư.",
+      D: "tiếp cận nguồn lao động giá rẻ châu Phi."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 21,
+    q: "Một trong những khó khăn mà quá trình hội nhập kinh tế quốc tế đem đến cho Việt Nam là",
+    opts: {
+      A: "sự cạnh tranh quyết liệt trên thị trường.",
+      B: "bị đánh thuế cao đối với hàng nông sản.",
+      C: "khó khăn trong quá trình vận chuyển.",
+      D: "nguồn vốn được vay với lãi suất quá cao."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 22,
+    q: "Những thành tựu trong công cuộc Đổi mới đất nước từ năm 1986 đến nay chứng tỏ",
+    opts: {
+      A: "sự cần thiết phải liên kết về mặt quân sự.",
+      B: "Việt Nam trở thành cường quốc kinh tế.",
+      C: "đường lối đổi mới là đúng đắn, phù hợp.",
+      D: "kiên định con đường chủ nghĩa xã hội."
+    },
+    answer: "C"
+  },
+
+  {
+    id: 23,
+    q: "Một trong những nội dung là hạn chế của công cuộc đổi mới kinh tế đất nước từ năm 1986 đến nay là",
+    opts: {
+      A: "tình trạng mất cân đối trong ngành kinh tế.",
+      B: "lệ thuộc hoàn toàn thị trường Trung Quốc.",
+      C: "chưa tiếp cận được thị trường châu Âu.",
+      D: "chưa đưa tiến bộ khoa học vào sản xuất."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 24,
+    q: "Một trong những nội dung là hạn chế của công cuộc đổi mới văn hóa đất nước từ năm 1986 đến nay là",
+    opts: {
+      A: "chịu ảnh hưởng sâu sắc của văn minh Ấn Độ.",
+      B: "nhiều giá trị văn hóa truyền thống bị mai một.",
+      C: "còn thiếu đi một vài hệ tư tưởng chính thống.",
+      D: "văn hóa không được truyền bá ra bên ngoài."
+    },
+    answer: "B"
+  },
+
+  {
+    id: 25,
+    q: "Lực lượng nào sau đây giữ vai trò tập hợp, đoàn kết toàn thể dân tộc trong thời kỳ xây dựng và bảo vệ Tổ quốc ngày nay?",
+    opts: {
+      A: "Mặt trận Tổ quốc Việt Nam.",
+      B: "Đảng Cộng sản Việt Nam.",
+      C: "Giáo hội Phật giáo Việt Nam.",
+      D: "Đội tuyển quốc gia Việt Nam."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 26,
+    q: "Nhân tố quyết định đến sự thành công của công cuộc Đổi mới đất nước từ năm 1986 đến nay là:",
+    opts: {
+      A: "những bài học từ Liên Xô và Trung Quốc.",
+      B: "viện trợ to lớn, cần thiết từ Liên Hợp quốc.",
+      C: "Mỹ chủ động xóa bỏ bao vây và cấm vận.",
+      D: "vai trò lãnh đạo của Đảng Cộng sản Việt Nam."
+    },
+    answer: "D"
+  },
+
+  {
+    id: 27,
+    q: "Những thành tựu trong công cuộc Đổi mới đất nước của Việt Nam và cuộc cải cách - mở cửa của Trung Quốc đều có ý nghĩa nào sau đây?",
+    opts: {
+      A: "Nâng cao vị thế đất nước trên trường quốc tế.",
+      B: "Trở thành ủy viên thường trực hội đồng bảo an.",
+      C: "Thu nhập quốc dân đạt mức trên 1000 tỷ đô la.",
+      D: "Buộc Mỹ rút các căn cứ quân sự gần biên giới."
+    },
+    answer: "A"
+  },
+
+  {
+    id: 28,
+    q: "Một trong những nội dung là điểm khác biệt của chính sách đối ngoại trước và sau công cuộc đổi mới đất nước ở Việt Nam là:",
+    opts: {
+      A: "muốn nâng cao vị thế đất nước.",
+      B: "coi trọng mối quan hệ với Lào.",
+      C: "thái độ và chính sách với Mỹ.",
+      D: "kiên trì sự lãnh đạo của Đảng."
+    },
+    answer: "C"
+  }
+
+];
+  
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+shuffleArray(questionsData);
+
+const container = document.getElementById('questions');
+
+questionsData.forEach((item, index) => {
+  const qNumber = index + 1;
+
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.id = 'q' + qNumber;
+
+  div.innerHTML = `
+    <div class="qnum">Câu ${qNumber}:</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options">
+      ${Object.entries(item.opts).map(([key, val]) => `
+        <label class="opt">
+          <input type="radio" name="q${qNumber}" value="${key}">
+          <strong>${key}.</strong> ${val}
+        </label>
+      `).join('')}
+    </div>
+  `;
+
+  container.appendChild(div);
+});
+
+
+  // grading logic
+  const submitBtn = document.getElementById('submitBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const scoreDiv = document.getElementById('score');
+  const feedbackDiv = document.getElementById('feedback');
+
+  submitBtn.addEventListener('click', ()=>{
+  let correctCount = 0;
+  let total = questionsData.length;
+
+  for(let i=0;i<total;i++){
+    const qNumber = i + 1;
+    const selected = document.querySelector(`input[name="q${qNumber}"]:checked`);
+    const qDiv = document.getElementById('q'+qNumber);
+
+    qDiv.classList.remove('correct','wrong');
+    const old = qDiv.querySelector('.note'); if(old) old.remove();
+
+    const note = document.createElement('div');
+    note.className = 'note small';
+
+    if(!selected){
+      note.textContent = '(Chưa trả lời)';
+      qDiv.appendChild(note);
+      continue;
+    }
+
+    if(selected.value === questionsData[i].answer){
+      correctCount++;
+      qDiv.classList.add('correct');
+      note.textContent = `Đúng — đáp án: ${questionsData[i].answer}`;
+    } else {
+      qDiv.classList.add('wrong');
+      note.textContent = `Sai — đáp án đúng: ${questionsData[i].answer}`;
+    }
+
+    qDiv.appendChild(note);
+  }
+
+  scoreDiv.innerHTML = `<strong>Kết quả: ${correctCount}/${total}</strong>`;
+  submitBtn.disabled = true;
+});
+
+  resetBtn.addEventListener('click', ()=>{
+    document.getElementById('quizForm').reset();
+    // clear highlights/notes
+    for(let i=1;i<=questionsData.length;i++){
+      const qDiv = document.getElementById('q'+i);
+      qDiv.classList.remove('correct','wrong');
+      const note = qDiv.querySelector('.note'); if(note) note.remove();
+      const un = qDiv.querySelector('.small'); if(un) un.remove();
+    }
+    scoreDiv.innerHTML='';
+    feedbackDiv.innerHTML='';
+    submitBtn.disabled = false;
+  });
+  </script>
+</body>
+</html>
