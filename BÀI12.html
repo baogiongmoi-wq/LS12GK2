@@ -58,712 +58,337 @@
 
   <script>
 const questionsData = [
-
   {
     id: 1,
-    q: "Một trong những địa điểm diễn ra các hoạt động đối ngoại của Phan Bội Châu là",
+    q: "Thuyết tiến hóa tổng hợp được chia thành:",
     opts: {
-      A: "Nhật.",
-      B: "Anh.",
-      C: "Đức.",
-      D: "Ấn Độ."
+      A: "Tiến hóa nhỏ và tiến hóa lớn.",
+      B: "Tiến hóa bằng đột biến trung tính, tiến hóa nhỏ và tiến hóa lớn.",
+      C: "Tiến hóa bằng đột biến trung tính, tiến hóa lớn.",
+      D: "Tiến hóa bằng đột biến trung tính và tiến hóa nhỏ."
     },
     answer: "A"
   },
-
   {
     id: 2,
-    q: "Một trong những địa điểm diễn ra các hoạt động đối ngoại của Phan Châu Trinh là",
+    q: "Theo thuyết tiến hoá tổng hợp thì tiến hóa nhỏ là quá trình",
     opts: {
-      A: "Pháp.",
-      B: "Ấn Độ.",
-      C: "Liên Xô.",
-      D: "Ba Lan."
+      A: "hình thành các đơn vị phân loại trên loài như: chi, họ, bộ, lớp, ngành.",
+      B: "biến đồi tần số các allele và thành phần kiểu gene của quần thể.",
+      C: "biến đổi kiểu hình của quần thể gốc đưa đến hình thành loài mới.",
+      D: "biến đổi thành phần kiểu gene dẫn tới biến đổi kiểu hình mới."
     },
-    answer: "A"
+    answer: "B"
   },
-
   {
     id: 3,
-    q: "Năm 1908, Phan Bội Châu đã tham gia thành lập tổ chức nào sau đây?",
+    q: "Đâu là đặc điểm của tiến hóa nhỏ?",
     opts: {
-      A: "Hội liên hiệp thuộc địa.",
-      B: "Điền Quế Việt liên minh.",
-      C: "Mặt trận Việt-Miên-Lào.",
-      D: "Mặt trận Tổ quốc Việt Nam."
+      A: "Diễn ra trong một thời gian dài.",
+      B: "Diễn ra trong một phạm vi phân bố tương đối hẹp.",
+      C: "Hình thành các đơn vị phân loại trên loài.",
+      D: "Khó nghiên cứu bằng thực nghiệm."
     },
     answer: "B"
   },
-
   {
     id: 4,
-    q: "Năm 1911, Phan Bội Châu đã trở về",
+    q: "Theo quan điểm thuyết tiến hóa hiện đại, đơn vị tiến hóa cấp cơ sở là",
     opts: {
-      A: "Việt Nam.",
-      B: "Liên Xô.",
-      C: "Trung Quốc.",
-      D: "Thái Lan."
+      A: "cá thể.",
+      B: "quần thể.",
+      C: "quần xã.",
+      D: "hệ sinh thái"
     },
-    answer: "C"
+    answer: "B"
   },
-
   {
     id: 5,
-    q: "Một trong những địa điểm mà Nguyễn Ái Quốc thực hiện các hoạt động đối ngoại từ năm 1911 đến năm 1920 là",
+    q: "Theo quan niệm hiện đại, thực chất của quá trình tiến hóa nhỏ:",
     opts: {
-      A: "Trung Quốc.",
-      B: "Liên Xô.",
-      C: "Thái Lan.",
-      D: "Pháp."
-    },
-    answer: "D"
-  },
-
-  {
-    id: 6,
-    q: "Một trong những tổ chức được Nguyễn Ái Quốc thành lập khi ở nước ngoài giai đoạn từ năm 1911-1930 là",
-    opts: {
-      A: "Hội liên hiệp thuộc địa.",
-      B: "Điền Quế Việt liên minh.",
-      C: "Mặt trận Việt - Miên - Lào.",
-      D: "Mặt trận Tổ quốc Việt Nam."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 7,
-    q: "Trong giai đoạn từ năm 1923 đến năm 1927 Nguyễn Ái Quốc đã thực hiện các hoạt động đối ngoại ở đâu?",
-    opts: {
-      A: "Ấn Độ.",
-      B: "Liên Xô.",
-      C: "Thái Lan.",
-      D: "Tây Âu."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 8,
-    q: "Một trong những hoạt động đối ngoại của Đảng Cộng sản Đông Dương trong giai đoạn 1930 - 1945 là",
-    opts: {
-      A: "quyên góp giúp đỡ Nhân dân thế giới.",
-      B: "đưa bộ đội tình nguyện vào chiến đấu.",
-      C: "thành lập Mặt trận Tổ quốc các cấp.",
-      D: "gửi đơn xin gia nhập Hội quốc liên."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 9,
-    q: "Một trong những tổ chức được Đảng Cộng sản Đông Dương tích cực củng cố quan hệ trong giai đoạn 1930 - 1945 là",
-    opts: {
-      A: "Hội liên hiệp thuộc địa.",
-      B: "Đảng Cộng sản Trung Quốc.",
-      C: "Hội đồng tương trợ kinh tế.",
-      D: "Tổ chức phòng thủ Vác-sa-va."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 10,
-    q: "Đầu thế kỷ XX, nhân vật tiên phong tìm đến trào lưu dân chủ tư sản để cứu nước là",
-    opts: {
-      A: "Phan Bội Châu.",
-      B: "Nguyễn Ái Quốc.",
-      C: "Nguyễn Đức Cảnh.",
-      D: "Ngô Bội Phu."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 11,
-    q: "Phong trào nào sau đây được Phan Bội Châu tổ chức trong giai đoạn 1905 đến 1917?",
-    opts: {
-      A: "Tây học.",
-      B: "Cải cách.",
-      C: "Bạo động.",
-      D: "Đông Du."
-    },
-    answer: "D"
-  },
-
-  {
-    id: 12,
-    q: "Một trong những tổ chức mà Nguyễn Ái Quốc đã gia nhập trong quá trình tìm đường cứu nước (1911 - 1941) là",
-    opts: {
-      A: "Đảng xã hội Pháp.",
-      B: "Đảng Bảo thủ Anh.",
-      C: "Đảng Cộng sản Đức.",
-      D: "Đảng Dân chủ Mỹ."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 13,
-    q: "Người Cộng sản đầu tiên của dân tộc Việt Nam là",
-    opts: {
-      A: "Phan Bội Châu.",
-      B: "Nguyễn Ái Quốc.",
-      C: "Nguyễn Đức Cảnh.",
-      D: "Ngô Bội Phu."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 14,
-    q: "Năm 1919, Nguyễn Ái Quốc có hoạt động đối ngoại nào sau đây?",
-    opts: {
-      A: "Sang Liên Xô dự lễ tang Lênin, nghiên cứu chủ nghĩa Mác.",
-      B: "Tham dự Đại hội Tua, bỏ phiếu tán thành gia nhập Quốc tế Ba.",
-      C: "Gửi bản yêu sách của Nhân dân An Nam đến hội nghị Véc-xai.",
-      D: "Tham gia đoàn cố vấn cao cấp của Liên Xô đến Trung Quốc."
+      A: "Là quá trình hình thành loài mới.",
+      B: "Là quá trình hình thành các đơn vị phân loại trên loài.",
+      C: "Là quá trình biến đổi cấu trúc di truyền của quần thể.",
+      D: "Là quá trình tạo ra nguồn biến dị di truyền của quần thể."
     },
     answer: "C"
   },
-
   {
-    id: 15,
-    q: "Ngày 9/3/1945, diễn ra sự kiện",
+    id: 6,
+    q: "Những biến đổi trong quá trình tiến hóa nhỏ diễn ra theo trình tự nào?",
     opts: {
-      A: "Nhật tiến hành đảo chính Pháp.",
-      B: "Thời cơ của khởi nghĩa đã đến.",
-      C: "Giành chính quyền ở Hà Nội.",
-      D: "Vua Bảo Đại tuyên bố thoái vị."
+      A: "Phát sinh đột biến  Sự phát tán đột biến  Chọn lọc các đột biến có lợi  Cách li sinh sản.",
+      B: "Phát sinh đột biến  Cách li sinh sản giữa các quần thể đã bị biến đổi với quần thể gốc  Phát tán đột biến qua giao phối  Chọn lọc các đột biến có lợi.",
+      C: "Phát tán đột biến  Chọn lọc các đột biến có lợi  Cách li sinh sản  Phát tán đột biến giao phối.",
+      D: "Phát tán đột biến  Chọn lọc các đột biến có lợi  Sự phát sinh đột biến  Cách li sinh sản."
     },
     answer: "A"
+  },
+  {
+    id: 7,
+    q: "Kết quả của tiến hóa nhỏ có thể dẫn tới hình thành…",
+    opts: {
+      A: "nòi địa lí.",
+      B: "nòi sinh thái.",
+      C: "loài mới.",
+      D: "chi mới"
+    },
+    answer: "C"
+  },
+  {
+    id: 8,
+    q: "Khẳng định nào sau đây về tiến hóa nhỏ của học thuyết tiến hóa tổng hợp hiện đại là đúng?",
+    opts: {
+      A: "Tiến hóa nhỏ kết thúc bằng sự hình thành loài mới được đánh dấu bằng sự xuất hiện của cách li sinh sản",
+      B: "Tiến hóa nhỏ xảy ra với từng các cá thể của loài nên đơn vị tiến hóa là loài",
+      C: "Là quá trình hình thành các nhóm phân loại trên loài như chi, họ, bộ, lớp, ngành",
+      D: "Diễn ra trong không gian rộng và thời gian lịch sử dài, không thể tiến hành làm thực nghiệm"
+    },
+    answer: "A"
+  },
+  {
+    id: 9,
+    q: "Ở động vật, hiện tượng nào sau đây dẫn đến hiện tượng dòng gene?",
+    opts: {
+      A: "Sự biến đổi thành phần kiểu gene của quần thể qua giao phối tự do và ngẫu nhiên",
+      B: "Sự giao phối giữa các cá thể trong một quần thể",
+      C: "Sự phát sinh các đột biến gene xuất hiện trong quần thể.",
+      D: "Sự di cư của các cá thể cùng loài từ quần thể này sang quần thể khác."
+    },
+    answer: "D"
+  },
+  {
+    id: 10,
+    q: "Đối với tiến hóa",
+    opts: {
+      A: "Đột biến tự nhiên được xem là nguồn nguyên liệu sơ cấp, trong đó đột biến gene là nguồn nguyên liệu chủ yếu.",
+      B: "Đột biến tự nhiên được xem là nguồn nguyên liệu sơ cấp, trong đó đột biến nhiễm sắc thể là nguồn nguyên liệu chủ yếu.",
+      C: "Đột biến tự nhiên được xem là nguồn nguyên liệu sơ cấp, trong đó đột biến trung tính là nguồn nguyên liệu chủ yếu.",
+      D: "Đột biến tự nhiên được xem là nguồn nguyên liệu thứ cấp, trong đó đột biến gene là nguồn nguyên liệu chủ yếu."
+    },
+    answer: "A"
+  },
+  {
+    id: 11,
+    q: "Khi nói về dòng gene, phát biểu nào sau đây đúng?",
+    opts: {
+      A: "Kết quả của dòng gene là luôn dẫn đến làm nghèo vốn gene của quần thể, làm giảm sự đa dạng di truyền của quần thể.",
+      B: "Các cá thể nhập cư có thể mang đến những allele mới làm phong phú thêm vốn gene của quần thể",
+      C: "Nếu số lượng cá thể nhập cư bằng số lượng cá thể xuất cư thì chắc chắn không làm thay đổi tần số kiểu gene của quần thể.",
+      D: "Hiện tượng xuất cư chỉ làm thay đổi tần số allele mà không làm thay đổi thành phần kiểu gene của quần thể"
+    },
+    answer: "B"
+  },
+  {
+    id: 12,
+    q: "Đâu không phải là đặc điểm mà các nhân tố dòng gene và nhân tố đột biến gene đều có?",
+    opts: {
+      A: "Đều có thể làm xuất hiện các kiểu gene mới trong quần thể",
+      B: "Đều làm thay đổi tần số allele không theo hướng xác định",
+      C: "Đều có thể làm xuất hiện các allele mới trong quần thể",
+      D: "Đều làm giảm tính đa dạng di truyền của quần thể"
+    },
+    answer: "D"
+  },
+  {
+    id: 13,
+    q: "Ở loài thực vật giao phấn, các hạt phấn của quần thể 1 theo gió bay sang quần thể 2 và thụ phấn cho các cây của quần thể 2. Đây là một ví dụ về",
+    opts: {
+      A: "Biến động di truyền.",
+      B: "Dòng gene.",
+      C: "Giao phối không ngẫu nhiên.",
+      D: "Thoái hóa giống."
+    },
+    answer: "B"
+  },
+  {
+    id: 14,
+    q: "Hai trường hợp điển hình dẫn đến phiêu bạc di truyền trong tự nhiên là",
+    opts: {
+      A: "Hiệu ứng thắt cổ chai và đột biến",
+      B: "Hiệu ứng thắt cổ chai và hiệu ứng sáng lập",
+      C: "Hiệu ứng sáng lập và đột biến",
+      D: "Chọn lọc tự nhiên và dòng gene"
+    },
+    answer: "B"
+  },
+  {
+    id: 15,
+    q: "Một gene lặn có hại có thể biến mất hoàn toàn khỏi quần thể do",
+    opts: {
+      A: "Dòng gene.",
+      B: "Đột biến ngược.",
+      C: "Phiêu bạt di truyền.",
+      D: "Chọn lọc tự nhiên."
+    },
+    answer: "C"
   },
   {
     id: 16,
-    q: "Mục đích thực hiện các hoạt động đối ngoại của Phan Bội Châu là",
+    q: "Theo thuyết tiến hóa hiện đại, giao phối không ngẫu nhiên thường làm thay đổi thành phần kiểu gene của quần thể theo hướng",
     opts: {
-      A: "thiết lập chế độ quân chủ chuyên chế.",
-      B: "giành độc lập cho dân tộc Việt Nam.",
-      C: "cải cách kinh tế xã hội ở Việt Nam.",
-      D: "nhằm liên kết với cách mạng các nước."
+      A: "Tăng dần tần số kiểu gene đồng hợp tử và giảm dần tần số kiểu gene dị hợp tử.",
+      B: "Giảm dần tần số kiểu gene đồng hợp tử trội và tăng dần tần số kiểu gene dị hợp tử",
+      C: "Tăng dần tần số kiểu gene đồng hợp tử trội và giảm dần tần số kiểu gene đồng hợp tử lặn.",
+      D: "Giảm dần tần số kiểu gene đồng hợp tử lặn và tăng dần tần số kiểu gene dị hợp tử."
     },
-    answer: "B"
+    answer: "A"
   },
-
   {
     id: 17,
-    q: "Từ năm 1905 đến năm 1917, các tổ chức mà Phan Bội Châu thành lập có mục đích nào sau đây?",
+    q: "Quá trình giao phối không ngẫu nhiên được xem là nhân tố tiến hóa vì",
     opts: {
-      A: "Vận động cải cách và duy tân.",
-      B: "Đề cải cách kinh tế, chính trị.",
-      D: "Nhằm lật độ chế độ phong kiến.",
-      C: "Chống lại Pháp giành độc lập."
+      A: "Làm thay đổi tần số các kiểu gene trong quần thể",
+      B: "Tạo ra trạng thái cân bằng di truyền trong quần thể",
+      C: "Làm thay đổi tần số các allele trong quần thể",
+      D: "Làm thay đổi tần số các allele và các kiểu gene trong quần thể"
     },
-    answer: "C"
+    answer: "A"
   },
-
   {
     id: 18,
-    q: "Mục đích thực hiện các hoạt động đối ngoại của Phan Chu Trinh là",
+    q: "Nhân tố tiến hóa không làm thay đổi tần số allele nhưng làm thay đổi thành phần kiểu gene của quần thể là",
     opts: {
-      A: "vận động cải cách và duy tân.",
-      B: "tiến hành khởi nghĩa vũ trang.",
-      C: "tập hợp lực lượng cách mạng.",
-      D: "xin viện trợ các nước châu Âu."
+      A: "Phiêu bạt di truyền.",
+      B: "Đột biến.",
+      C: "Dòng gene.",
+      D: "Giao phối không ngẫu nhiên"
     },
-    answer: "A"
+    answer: "D"
   },
-
   {
     id: 19,
-    q: "Một trong những nội dung là mục đích của Nguyễn Tất Thành khi quyết định sang Pháp năm 1911",
+    q: "Chọn lọc tự nhiên diễn ra trên quy mô lớn và thời gian lịch sử lâu dài sẽ dẫn đến hiện tượng",
     opts: {
-      A: "nghiên cứu chủ nghĩa Mác-Lênin tìm đường cứu nước.",
-      B: "tạo mối liên kết giữa cách mạng Việt Nam và thế giới.",
-      C: "tìm hiểu về nước Pháp, sau đó trở về giúp đồng bào.",
-      D: "thành lập các tổ chức cách mạng, chuẩn bị khởi nghĩa."
+      A: "Hình thành các đơn vị phân loại trên loài như chi, họ, bộ, lớp, ngành.",
+      B: "Đào thải các biến dị mà con người không ưa thích.",
+      C: "Tích lũy các biến dị đáp ứng nhu cầu nhiều mặt của loài người",
+      D: "Hình thành những loài mới từ một loài ban đầu, các loài này được phân loại học xếp vào cùng một chi."
     },
-    answer: "C"
+    answer: "A"
   },
-
   {
     id: 20,
-    q: "Vì sao năm 1924, Nguyễn Ái Quốc quyết định trở về Quảng Châu, Trung Quốc?",
+    q: "Trong tiến hóa, chọn lọc tự nhiên được xem là nhân tố tiến hóa cơ bản nhất vì:",
     opts: {
-      A: "Có nhiều người Việt Nam yêu nước.",
-      B: "Chính quyền Tưởng ở đây rất mạnh.",
-      C: "Do sự chỉ đạo của Quốc tế cộng sản.",
-      D: "Thành lập Đảng Cộng sản Việt Nam."
+      A: "Chọn lọc tự nhiên quy định chiều hướng, tốc độ, nhịp điệu biến đổi thành phần kiểu gene của quần thể.",
+      B: "Chọn lọc tự nhiên làm tăng cường sự phân hóa kiểu gene trong quần thể gốc.",
+      C: "Chọn lọc tự nhiên tác động trực tiếp lên kiểu gene.",
+      D: "Chọn lọc tự nhiên làm tăng tính đa dạng của loài."
     },
     answer: "A"
   },
-
   {
     id: 21,
-    q: "Những hoạt động đối ngoại của Nguyễn Ái Quốc trong giai đoạn 1911 đến 1927 có ý nghĩa như thế nào đối với sự ra đời của Đảng Cộng sản Việt Nam?",
+    q: "Áp lực của chọn lọc tự nhiên chủ yếu phụ thuộc vào",
     opts: {
-      A: "Sự đồng ý của Quốc tế cộng sản.",
-      B: "Chuẩn bị về tư tưởng và tổ chức.",
-      C: "Thống nhất các tổ chức cộng sản.",
-      D: "Chuẩn bị đợi thời cơ khởi nghĩa."
+      A: "Điều kiện môi trường sống.",
+      B: "Thành phần kiểu gene của quần thể.",
+      C: "Mật độ cá thể của quần thể.",
+      D: "Kích thước của quần thể."
     },
-    answer: "B"
+    answer: "A"
   },
-
   {
     id: 22,
-    q: "Sự kiện nào sau đây đánh dấu Nguyễn Ái Quốc tìm ra con đường cứu nước, giải phóng cho dân tộc Việt Nam?",
+    q: "Phát biểu nào sau đây mô tả vai trò của chọn lọc tự nhiên trong quá trình tiến hóa nhỏ?",
     opts: {
-      A: "Bỏ phiếu tán thành gia nhập Quốc tế ba (1920).",
-      B: "Gửi bản yêu sách của Nhân dân An Nam (1919).",
-      C: "Đọc được bản Luận cương của Lênin (1920).",
-      D: "Tham gia hợp nhất các tổ chức cộng sản (1930)."
+      A: "Đảm bảo sự sống sót và sinh sản ưu thế của những cá thể mang đặc điểm có lợi.",
+      B: "Hình thành những đặc điểm thích nghi tương quan giữa các cá thể trong quần thể.",
+      C: "Phân hóa khả năng sinh sản của những kiểu gene khác nhau trong quần thể giao phối.",
+      D: "Quy định chiều hướng và nhịp điệu biến đổi thành phần kiểu gene của quần thể, định hướng tiến hóa."
     },
-    answer: "C"
+    answer: "D"
   },
-
   {
     id: 23,
-    q: "Những hoạt động đối ngoại của Hồ Chí Minh trong giai đoạn (1942-1945) có tác dụng như thế nào đối với cách mạng Việt Nam?",
+    q: "Ba yếu tố quan trọng nhất đóng góp vào quá trình hình thành các đặc điểm thích nghi của quần thể sinh vật là",
     opts: {
-      A: "Tranh thủ sự ủng hộ đối với cách mạng Việt Nam.",
-      B: "Tập hợp nông dân đứng dưới ngọn cờ của Đảng.",
-      C: "Thúc đẩy sự phát triển của phong trào công nhân.",
-      D: "Xu thế cách mạng vô sản đã thắng thế hoàn toàn."
+      A: "Đột biến, giao phối và chọn lọc tự nhiên",
+      B: "Đột biến, chọn lọc tự nhiên và chọn lọc nhân tạo",
+      C: "Chọn lọc, giao phối và phát tán",
+      D: "Đột biến, phát tán và chọn lọc ngẫu nhiên"
     },
     answer: "A"
   },
-
   {
     id: 24,
-    q: "Những cuộc tiếp xúc giữa đại diện của Mặt trận Việt Minh với Mỹ từ sau ngày 9-3-1945 có tác dụng đối với cách mạng Việt Nam là",
+    q: "Nhân tố tiến hóa tác động trực tiếp lên sự hình thành quần thể thích nghi là",
     opts: {
-      A: "Mỹ đã cung cấp một phần hậu cần.",
-      B: "nhận được sự công nhận từ bên ngoài.",
-      C: "đã chuẩn bị xây dựng khu giải phóng.",
-      D: "chính phủ tay sai Nhật hoang mang."
+      A: "Giao phối.",
+      B: "Đột biến.",
+      C: "Chọn lọc tự nhiên.",
+      D: "Dòng gene."
     },
-    answer: "A"
+    answer: "C"
   },
-
   {
     id: 25,
-    q: "Một trong những điểm giống nhau về kết quả trong các hoạt động đối ngoại của Phan Bội Châu và Phan Chu Trinh là",
+    q: "Dạng cách li nào là điều kiện cần thiết để các nhóm cá thể đã phân hoá tích luỹ các đột biến mới theo các hướng khác nhau dẫn đến sự sai khác ngày càng lớn trong kiểu gene",
     opts: {
-      A: "đã thúc đẩy phong trào công nhân.",
-      B: "Pháp cho thực hiện nhiều cải cách.",
-      C: "đã nhận ra được bản chất kẻ thù.",
-      D: "chưa giành lại độc lập cho dân tộc."
+      A: "Cách li địa lý",
+      B: "Cách li sinh thái",
+      C: "Cách li sinh sản và sinh thái",
+      D: "Cách li di truyền và cách li sinh sản"
     },
-    answer: "D"
+    answer: "A"
   },
-
   {
     id: 26,
-    q: "Một trong những điểm tương đồng trong các hoạt động đối ngoại của Nguyễn Ái Quốc và Phan Bội Châu là ở",
+    q: "Dạng cách li nào đánh dấu sự hình thành loài mới",
     opts: {
-      A: "kết quả.",
-      B: "mục tiêu.",
-      C: "hướng đi.",
-      D: "nhận thức."
+      A: "Cách li sinh sản (Cách li di truyền)",
+      B: "Cách li địa lý và Cách li sinh thái",
+      C: "Cách li nơi ở",
+      D: "A và B đúng"
     },
-    answer: "B"
+    answer: "A"
   },
-
   {
     id: 27,
-    q: "Một trong những điểm khác trong các hoạt động đối ngoại của Nguyễn Ái Quốc và Phan Châu Trinh là",
+    q: "Cách li sinh sản là",
     opts: {
-      A: "mục tiêu.",
-      B: "mục đích.",
-      C: "đối tượng.",
-      D: "kết quả."
+      A: "Trở ngại ngăn cản việc tạo ra con lai",
+      B: "Trở ngại ngăn cản sinh vật giao phối với nhau",
+      C: "Trở ngại sinh học ngăn cản các loài sinh vật giao phối tạo ra đời con hữu thụ",
+      D: "Trở ngại ngăn cản việc tạo ra con lai hữu thụ"
     },
-    answer: "D"
+    answer: "C"
   },
-
   {
     id: 28,
-    q: "Nguyễn Tất Thành nhận định về con đường cứu nước của Phan Bội Châu là “đưa hổ cửa trước, rước beo cửa sau” là đúng hay sai? Vì sao?",
+    q: "Đột biến xảy ra trong một quần thể cây lưỡng bội làm xuất hiện cây tứ bội. Cây tứ bội có khả năng sinh sản bình thường nên lâu dần đã xuất hiện quần thể cây tứ bội. Liệu ta có thể xem quần thể cây tứ bội là loài mới được không? Vì sao?",
     opts: {
-      A: "Đúng, vì bản chất của các nước đế quốc là đi xâm lược thuộc địa.",
-      B: "Sai, vì Nhật Bản đã có sự giúp đỡ rất nhiều cho Phan Bội Châu.",
-      C: "Sai, Nhật Bản đã giúp đỡ Việt Nam giành lại độc lập năm 1945.",
-      D: "Đúng, vì năm 1939 Nhật đã tiến hành xâm lược Việt Nam."
+      A: "Không, vì các NST trong từng cặp tương đồng không đổi.",
+      B: "Có, vì số lượng NST tăng lên.",
+      C: "Không, vì quần thể cây 4n vẫn thụ phấn được với cây 2n.",
+      D: "Có, vì quần thể cây 4n tuy thụ phấn được với cây 2n nhưng con lai bất thụ (cách li sinh sản)"
     },
-    answer: "A"
+    answer: "D"
   },
-
   {
     id: 29,
-    q: "“Thất bại của cụ Phan Bội Châu và Phan Châu Trinh là do chưa nhận ra được bản chất của các nước đế quốc, thực dân”. Nhận định này đúng hay sai, vì sao?",
+    q: "Loài lúa mì trồng hiện nay (Triticum destivum) chứa bộ NST lưỡng bội của 3 loài. Loài này được hình thành bằng con đường nào sau đây?",
     opts: {
-      A: "Đúng, vì Pháp - Nhật đã câu kết với nhau chống lại cách mạng Việt Nam.",
-      B: "Đúng, vì năm 1945 Nhật đã gây nạn đói khiến hai triệu đồng bào ta chết.",
-      C: "Sai, vì hai Cụ Phan chưa chuẩn bị được lực lượng, tiềm lực kinh tế yếu.",
-      D: "Sai, vì khuynh hướng cứu nước dân chủ tư sản không nhận được ủng hộ."
+      A: "Lai xa và đa bội hoả.",
+      B: "Cách lí địa lý.",
+      C: "Cách lí sinh thái.",
+      D: "Cách ly cơ học"
     },
     answer: "A"
-},
+  },
   {
     id: 30,
-    q: "Một trong những thuận lợi của nước Việt Nam dân chủ Cộng hòa sau Cách mạng tháng Tám (1945) là:",
+    q: "Tiến hóa lớn là?",
     opts: {
-      A: "nhân dân hăng hái ủng hộ cách mạng.",
-      B: "được sự công nhận của các cường quốc.",
-      C: "là thành viên của tổ chức Liên hợp quốc.",
-      D: "thực dân Pháp đã đầu hàng quân Nhật."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 31,
-    q: "Một trong những khó khăn của nước Việt Nam dân chủ Cộng hòa sau Cách mạng tháng Tám (1945) là",
-    opts: {
-      A: "phát xít Nhật chưa chấp nhận đầu hàng.",
-      B: "phải đối phó với thù trong và giặc ngoài.",
-      C: "hai mươi vạn quân Tưởng ở miền Nam.",
-      D: "Anh, Mỹ cho Pháp tiến quân ra miền Bắc."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 32,
-    q: "Năm 1945, một trong những hoạt động đối ngoại của nước Việt Nam Dân chủ Cộng hòa là",
-    opts: {
-      A: "gửi Công hàm đề nghị các nước lớn công nhận Việt Nam.",
-      B: "Chủ tịch Hồ Chí Minh đi thăm các nước xã hội chủ nghĩa.",
-      C: "Việt Nam cử đại biểu tham dự Đại hội Quốc tế cộng sản.",
-      D: "ký với đại diện của chính phủ Pháp bản Hiệp định Sơ-bộ."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 33,
-    q: "Ngày 6-3-1946, Chính phủ nước Việt Nam Dân chủ Cộng hòa đã ký với đại diện của Chính phủ Pháp bản hiệp định nào sau đây?",
-    opts: {
-      A: "Bàn Môn Điếm.",
-      B: "Giơ-ne-vơ.",
-      C: "Hiệp định Pa-ri.",
-      D: "Hiệp định Sơ-bộ."
-    },
-    answer: "D"
-  },
-
-  {
-    id: 34,
-    q: "Một trong những đối tượng của hoạt động đối ngoại mà nước Việt Nam Dân chủ Cộng hòa tiến hành từ sau Cách mạng tháng Tám (1945) là:",
-    opts: {
-      A: "Pháp.",
-      B: "Cuba.",
-      C: "Ai Cập.",
-      D: "Anh."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 35,
-    q: "Trong kháng chiến chống thực dân Pháp 1945 - 1954, nước Việt Nam Dân chủ Cộng hòa đã mở các cơ quan đại diện ở:",
-    opts: {
-      A: "châu Phi.",
-      B: "châu Mỹ.",
-      C: "châu Úc.",
-      D: "châu Á."
-    },
-    answer: "D"
-  },
-
-  {
-    id: 36,
-    q: "Một trong những quốc gia mà nước Việt Nam Dân chủ Cộng hòa thiết lập quan hệ ngoại giao năm 1950 là",
-    opts: {
-      A: "Trung Quốc.",
-      B: "Ai Cập.",
-      C: "Cuba.",
-      D: "Ấn Độ."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 37,
-    q: "Liên minh Việt - Miên - Lào (1951) là",
-    opts: {
-      A: "liên minh tự nguyện của ba nước Đông Dương.",
-      B: "tổ chức hợp tác kinh tế, chính trị Đông Dương.",
-      C: "liên minh quân sự của ba nước Đông Dương.",
-      D: "tổ chức hợp tác phát triển của Đông Dương."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 38,
-    q: "Hội nghị Giơ-ne-vơ (1954) được triệu tập để giải quyết vấn đề nào sau đây?",
-    opts: {
-      A: "Đông Đức.",
-      B: "Đông Dương.",
-      C: "Cam-pu-chia.",
-      D: "Trung Đông."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 39,
-    q: "Một trong những nhiệm vụ của hoạt động đối ngoại của Việt Nam trong giai đoạn 1965 - 1975 là",
-    opts: {
-      A: "đòi Mỹ, Diệm thi hành Hiệp định Pa-ri.",
-      B: "tố cáo tội ác của chiến tranh xâm lược.",
-      C: "đòi quyền tự do dân sinh và dân chủ.",
-      D: "bảo vệ các chủ quyền trên biển Đông."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 40,
-    q: "Nội dung nào sau đây là mục đích của các hoạt động đối ngoại mà nước Việt Nam Dân chủ Cộng hòa tiến hành trong giai đoạn 1954-1960?",
-    opts: {
-      A: "đòi Mỹ, Diệm thi hành Hiệp định Giơ-ne-vơ.",
-      B: "tố cáo tội ác của chính quyền Sài Gòn gây ra.",
-      C: "đấu tranh đòi quyền tự do dân sinh và dân chủ.",
-      D: "bảo vệ biên giới giữa hai miền là vĩ tuyến 17."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 41,
-    q: "Hội nghị Pa-ri (1969-1973) được tổ chức với mục đích nào sau đây?",
-    opts: {
-      A: "Chống lại âm mưu xâm lược bán đảo Đông Dương.",
-      B: "Thiết lập liên minh giữa các nước xã hội chủ nghĩa.",
-      C: "Tìm giải pháp kết thúc cuộc chiến tranh Việt Nam.",
-      D: "Thương lượng để kết thúc cuộc khủng hoảng tên lửa."
+      A: "quá trình biến đổi về tần số alen và thành phần kiểu gene của quần thể.",
+      B: "quá trình hình thành loài.",
+      C: "quá trình hình thành các nhóm phân loại trên loài.",
+      D: "quá trình hình thành quần thể thích nghi"
     },
     answer: "C"
-  },
-
-  {
-    id: 42,
-    q: "Hiệp định Sơ-bộ (6/3/1946), Pháp đã công nhận Việt Nam là quốc gia",
-    opts: {
-      A: "độc lập.",
-      B: "tự do.",
-      C: "dân chủ.",
-      D: "dân quyền."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 43,
-    q: "Ngày 14/9/1946, Chủ tịch Hồ Chí Minh đã ký với Pháp văn kiện nào sau đây?",
-    opts: {
-      A: "Tạm ước.",
-      B: "Công ước.",
-      C: "Khế ước.",
-      D: "Hiệp ước."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 44,
-    q: "Một trong những nội dung của quyền dân tộc cơ bản là",
-    opts: {
-      A: "độc lập.",
-      B: "bình đẳng",
-      C: "hạnh phúc.",
-      D: "công bằng."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 45,
-    q: "Nội dung nào sau đây là mục đích của các hoạt động đối ngoại mà nước Việt Nam Dân chủ Cộng hòa tiến hành từ sau Cách mạng tháng Tám đến trước ngày 19/12/1946?",
-    opts: {
-      A: "Tranh thủ, tập trung phát triển kinh tế đất nước.",
-      B: "Xin gia nhập vào các tổ chức hòa bình quốc tế.",
-      C: "Yêu cầu các nước thiết lập quan hệ ngoại giao.",
-      D: "Để tránh một lúc phải đối phó với nhiều kẻ thù."
-    },
-    answer: "D"
-  },
-
-  {
-    id: 46,
-    q: "Các hoạt động đối ngoại mà nước Việt Nam dân chủ Cộng hòa tiến hành từ sau Cách mạng tháng Tám phải tuân thủ nguyên tắc nào sau đây?",
-    opts: {
-      A: "Không vi phạm đến chủ quyền dân tộc.",
-      B: "Không nhân nhượng thòa hiệp với Pháp.",
-      C: "Nhân nhượng tất cả yêu cầu của Tưởng.",
-      D: "Giải quyết xung đột bằng thương lượng."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 47,
-    q: "Nội dung nào sau đây thể hiện mục đích của việc Chủ tịch Hồ Chí Minh ký với Pháp bản Tạm ước ngày 14/9/1946",
-    opts: {
-      A: "Kéo dài thời gian hòa bình để chuẩn bị kháng chiến.",
-      B: "Tranh thủ thời gian để điều động bộ đội từ Nam ra.",
-      C: "Đợi chi viện từ các nước xã hội chủ nghĩa anh em.",
-      D: "Tranh thủ khi lực lượng Pháp còn yếu để đàm phán."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 48,
-    q: "Thắng lợi nào sau đây đã buộc Mỹ đến Pa-ri đàm phán với Chính phủ nước Việt Nam Dân chủ Cộng hòa?",
-    opts: {
-      A: "Vạn Tường.",
-      B: "Đồng Xoài.",
-      C: "Mậu Thân.",
-      D: "Núi Thành."
-    },
-    answer: "C"
-  },
-
-  {
-    id: 49,
-    q: "Thắng lợi nào sau đây đã buộc Mỹ phải chấp nhận ký Hiệp định Pa-ri?",
-    opts: {
-      A: "Điện Biên Phủ trên không",
-      B: "Tiến công chiến lược 1972.",
-      C: "Chiến dịch Huế - Đà Nẵng.",
-      D: "Chiến dịch Hồ Chí Minh."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 50,
-    q: "Các hoạt động đối ngoại thực hiện trong giai đoạn từ sau Cách mạng tháng Tám đến trước ngày 19/12/1946 có ý nghĩa như thế nào đối với cách mạng Việt Nam?",
-    opts: {
-      A: "Tạo điều kiện cho các chiến dịch quân sự diễn ra.",
-      B: "Tập hợp quần chúng đứng dưới ngọn cờ của Đảng.",
-      C: "Tranh thủ thời gian hòa hoãn để chờ sự chi viện.",
-      D: "Bảo vệ thành quả của Cách mạng tháng Tám năm 1945."
-    },
-    answer: "D"
-  },
-
-  {
-    id: 51,
-    q: "Một trong những kết quả đem lại cho cách mạng Việt Nam từ việc ký Hiệp định Sơ bộ ngày 6/3/1946 là:",
-    opts: {
-      A: "đẩy hai mươi vạn quân Tưởng về nước.",
-      B: "Pháp còn ở Việt Nam mười ngàn quân.",
-      C: "Pháp công nhận độc lập cho Việt Nam.",
-      D: "các nước xã hội chủ nghĩa đã viện trợ."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 52,
-    q: "Đâu là kết quả mà cách mạng Việt Nam đạt được khi ký Hiệp định Giơ-ne-vơ 1954?",
-    opts: {
-      A: "Thống nhất đất nước.",
-      B: "Miền Bắc giải phóng.",
-      C: "Miền Nam giải phóng.",
-      D: "Đánh bại đế quốc Mỹ."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 53,
-    q: "Đâu là kết quả mà cách mạng Việt Nam đạt được khi ký Hiệp định Pa-ri năm 1973?",
-    opts: {
-      A: "Đánh bại hoàn toàn đế quốc Mỹ.",
-      B: "So sánh lực lượng có lợi cho ta.",
-      C: "Thống nhất đất nước về lãnh thổ.",
-      D: "Nhận được sự viện trợ lớn từ Nhật."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 54,
-    q: "Sự kiện nào đây có ý nghĩa là bước ngoặt mới đối với cuộc kháng chiến chống Mỹ, cứu nước 1954-1975 của Nhân dân Việt Nam?",
-    opts: {
-      A: "Hội nghị cấp cao ba nước Đông Dương.",
-      B: "Cuộc tiến công chiến lược năm 1972.",
-      C: "Hiệp định Pa-ri được ký kết năm 1973.",
-      D: "Chiến thắng Lam Sơn 719 năm 1971."
-    },
-    answer: "C"
-  },
-
-  {
-    id: 55,
-    q: "Nội dung nào sau đây là điểm giống nhau cơ bản giữa Hiệp định Giơ-ne-vơ (1954) và Hiệp định Pa-ri (1973)?",
-    opts: {
-      A: "Đều buộc các nước đế quốc chấm dứt chiến tranh xâm lược và rút hết quân về nước.",
-      B: "Là văn bản pháp lý quốc tế ghi nhận các quyền tự do cơ bản của Nhân dân Việt Nam.",
-      C: "Các bên thừa nhận trên thực tế miền Nam Việt Nam có hai chính quyền, hai quân đội.",
-      D: "Thỏa thuận các bên ngừng bắn thực hiện chuyển quân, tập kết, chuyển giao khu vực."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 56,
-    q: "Một trong những nguyên tắc cơ bản, quan trọng để đàm phán đi đến ký kết Hiệp định Sơ-bộ 1946, Hiệp định Giơ-ne-vơ 1954 và Hiệp định Pa-ri 1973 là:",
-    opts: {
-      A: "tôn trọng quyền dân tộc cơ bản của Việt Nam.",
-      B: "phạm vi đóng quân chia thành vùng riêng biệt.",
-      C: "các bên tham chiến phải nhanh chóng rút quân.",
-      D: "không được sử dụng các loại vũ khí hủy diệt."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 57,
-    q: "Từ thắng lợi của Việt Nam trong Hội nghị Pa-ri (1973), Đảng đã rút ra bài học kinh nghiệm gì cho đường lối ngoại giao hiện nay?",
-    opts: {
-      A: "Thực hiện đường lối ngoại giao độc lập, tự chủ.",
-      B: "Tranh thủ tối đa sự ủng hộ của các cường quốc.",
-      C: "Giải quyết tranh chấp bằng biện pháp hòa bình.",
-      D: "Đa dạng hóa, đa phương hóa quan hệ quốc tế."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 58,
-    q: "Nội dung nào sau đây là hạn chế trong Hiệp định Giơ-ne-vơ 1954 đã được khắc phục trong Hiệp định Pa-ri 1973?",
-    opts: {
-      A: "Chuyển quân, tập kết.",
-      B: "Ba lực lượng chính trị.",
-      C: "Hai vùng kiểm soát.",
-      D: "Giám sát quốc tế."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 59,
-    q: "Nhận xét nào sau đây đối với Hiệp định Pa-ri (1973) về chấm dứt chiến tranh, lập lại hòa bình ở Việt Nam là đúng?",
-    opts: {
-      A: "Kết quả của cuộc đấu tranh ngoại giao dài nhất, khó khăn nhất.",
-      B: "Thắng lợi chung của khối xã hội chủ nghĩa trước âm mưu của Mỹ.",
-      C: "Hiệp định đầu tiên ghi nhận quyền dân tộc cơ bản của Việt Nam.",
-      D: "Là thời cơ trực tiếp để Nhân dân ta tiến lên giải phóng miền Nam."
-    },
-    answer: "A"
-  }];
+  }
+];
   
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
