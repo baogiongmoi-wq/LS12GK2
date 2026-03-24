@@ -58,346 +58,382 @@
   </footer>
 
   <script>
-const questionsData = [
-
+    const questionsData = [
   {
     id: 1,
-    q: "Một trong những nội dung thể hiện việc đổi mới tư duy chính trị của Đảng Cộng sản Việt Nam từ năm 1986 đến nay là gì?",
+    q: "Hoá thạch là gì?",
     opts: {
-      A: "Nhận thức rõ ràng hơn về tình hình thế giới.",
-      B: "Kiên định con đường đi lên chủ nghĩa xã hội.",
-      C: "Lấy tư tưởng Hồ Chí Minh làm kim chỉ nam.",
-      D: "Xác định việc đổi mới kinh tế làm trọng tâm."
+      A: "Di tích của các sinh vật sống trong các thời đại trước đã để lại trong lớp băng của vỏ Trái Đất",
+      B: "Di tích của sinh vật sống để lại trong thời đại trước đã để lại trong lớp đất sét của vỏ Trái Đất hoặc được bảo tồn trong lớp nhựa hổ phách",
+      C: "Di tích của các sinh vật sống để lại trong các thời đại trước đã để lại trong lớp địa chất của vỏ Trái Đất, xác sinh vật hóa đá hoặc được bảo tồn trong các điều kiện đặc biệt",
+      D: "Di tích phần cứng của sinh vật như xương, vỏ đá vôi được giữ lại trong đất, trang băng hoặc nhựa hổ phách."
     },
-    answer: "A"
+    answer: "C"
   },
-
   {
     id: 2,
-    q: "Mối quan hệ của Đảng, Nhà nước với Nhân dân ngày càng được tăng cường theo quy định của",
+    q: "Trong nghiên cứu lịch sử phát triển của sinh giới, hóa thạch có vai trò là",
     opts: {
-      A: "Tư pháp.",
-      B: "Hiến pháp.",
-      C: "Hành pháp.",
-      D: "Lập pháp."
+      A: "Xác định tuổi của hoá thạch bằng đồng vị phóng xạ",
+      B: "Bằng chứng gián tiếp về lịch sử phát triển của sinh giới.",
+      C: "Xác định tuổi của hoá thạch có thể xác định tuổi của quả đất",
+      D: "Bằng chứng trực tiếp về lịch sử phát triển của sinh giới."
     },
-    answer: "B"
+    answer: "D"
   },
-
   {
     id: 3,
-    q: "Từ sau năm 1986, bộ máy Nhà nước được sắp xếp theo hướng",
+    q: "Loại bằng chứng nào sau đây có thể giúp chúng ta xác định được loài nào xuất hiện trước, loài nào xuất hiện sau trong lịch sử phát sinh và phát triển của sự sống trên Trái Đất?",
     opts: {
-      A: "năm tham gia công tác.",
-      B: "giảm tiền lương tối đa.",
-      C: "tinh gọn và hiệu quả.",
-      D: "đơn giản và hiệu quả."
+      A: "Bằng chứng sinh học phân tử",
+      B: "Bằng chứng giải phẫu so sánh",
+      C: "Bằng chứng hóa thạch",
+      D: "Bằng chứng tế bào học"
     },
     answer: "C"
   },
-
   {
     id: 4,
-    q: "Dưới tác động của công cuộc Đổi mới, nền kinh tế Việt Nam vận hành theo định hướng",
+    q: "Quá trình hóa thạch của sinh vật diễn ra theo cách thức phổ biến như sau:",
     opts: {
-      A: "thị trường.",
-      B: "quan liêu.",
-      C: "bao cấp.",
-      D: "tư doanh."
+      A: "Cơ thể sinh vật được ướp trong băng và bảo vệ nguyên vẹn",
+      B: "Cơ thể sinh vật được cát, bùn, đất sét bao phủ, sau đó phần mềm bị phân hủy, các chất khoáng tới lấp vào chỗ trống đúc thành sinh vật bằng đá giống với sinh vật trước kia",
+      C: "Cơ thể sinh vật được phủ kín trong nhựa hổ phách và giữ nguyên hình dạng và màu sắc",
+      D: "Phần mềm của cơ thể liền bị phân hủy, chỉ có phần cứng như xương, vỏ đá vôi được giữ lại trong đất"
     },
-    answer: "A"
+    answer: "B"
   },
-
   {
     id: 5,
-    q: "Một trong những thành phần kinh tế mới được phép hoạt động từ sau khi đường lối đổi mới được thực thi là",
+    q: "Khi nói về hóa thạch phát biểu nào sau đây không đúng?",
     opts: {
-      A: "có vốn đầu tư nước ngoài.",
-      B: "kinh tế nhà nước quản lý.",
-      C: "kinh tế tập thể, hợp tác xã.",
-      D: "kinh tế cá thể, hộ gia đình."
+      A: "Hóa thạch cung cấp cho chúng ta những bằng chứng gián tiếp về lịch sử tiến hóa của sinh giới.",
+      B: "Tuổi của hóa thạch được xác định được nhờ phân tích các đồng vị phóng xạ có trong hóa thạch.",
+      C: "Căn cứ vào hóa thạch có thể biết loài nào xuất hiện trước, loài nào xuất hiện sau.",
+      D: "Hóa thạch là di tích của sinh vật để lại trong các lớp đất đá của vỏ trái đất"
     },
     answer: "A"
   },
-
   {
     id: 6,
-    q: "Thành phần kinh tế nào sau đây giữ vai trò chủ đạo trong nền kinh tế Việt Nam?",
+    q: "Để xác định tuổi của các lớp đất và hóa thạch tương đối mới người ta căn cứ vào:",
     opts: {
-      A: "Tư nhân.",
-      B: "Nhà nước.",
-      C: "Cá thể.",
-      D: "Nước ngoài."
+      A: "Lượng sản phẩm phân rã của các nguyên tố phóng xạ",
+      B: "Đánh giá trực tiếp thời gian phân rã của nguyên tố urani (Ur)",
+      C: "Lượng sản phẩm phân rã của các nguyên tố carbon phóng xạ",
+      D: "Đặc điểm địa chất của lớp đất"
     },
-    answer: "B"
+    answer: "C"
   },
-
   {
     id: 7,
-    q: "Một trong những thành tựu của công cuộc Đổi mới về xã hội là",
+    q: "Cơ quan tương đồng là những cơ quan:",
     opts: {
-      A: "xóa bỏ hố sâu phân cách giàu nghèo trên cả nước.",
-      B: "đã xóa bỏ hoàn toàn các mâu thuẫn trong xã hội.",
-      C: "chấp nhận, cho phép tự do thành lập các Đảng.",
-      D: "những nhu cầu thiết yếu được đáp ứng tốt hơn."
+      A: "Cùng nguồn gốc, đảm nhận những chức phận giống nhau",
+      B: "Có nguồn gốc khác nhau nhưng đảm nhận những chức phận giống nhau, có hình thái tương tự nhau",
+      C: "Cùng nguồn gốc, nằm ở những vị trí tương ứng trên cơ thể, có thể thực hiện các chức năng khác nhau",
+      D: "Có nguồn gốc khác nhau , nằm ở những vị trí tương ứng trên cơ thể có kiểu cấu tạo giống nhau"
     },
-    answer: "D"
+    answer: "C"
   },
-
   {
     id: 8,
-    q: "Một trong những thành tựu mà giáo dục Việt Nam đạt được vào năm 2000 là",
+    q: "Cặp cấu trúc nào dưới đây là cơ quan tương đồng?",
     opts: {
-      A: "phổ cập giáo dục tiểu học.",
-      B: "phổ cập trung học cơ sở.",
-      C: "đứng đầu thế giới về Toán.",
-      D: "hoàn thành phổ cập đại học."
+      A: "Cánh của chim và cánh của côn trùng.",
+      B: "Gai của cây hoa hồng và gai của cây xương rồng.",
+      C: "Cánh của dơi và chi trước của ngựa.",
+      D: "Mang của cá và mang của tôm."
     },
-    answer: "A"
+    answer: "C"
   },
-
   {
     id: 9,
-    q: "Một trong những thành tựu mà giáo dục Việt Nam đạt được vào năm 2010 là",
+    q: "Ý nghĩa của các cơ quan tương đồng với việc nghiên cứu tiến hóa là",
     opts: {
-      A: "phổ cập giáo dục tiểu học.",
-      B: "phổ cập trung học cơ sở.",
-      C: "đứng đầu thế giới về Văn.",
-      D: "đạt nhiều giải Noben nhất."
+      A: "Phản ánh sự tiến hóa đồng quy",
+      B: "Phản ánh sự tiến hóa phân li",
+      C: "Phản ánh nguồn gốc chung các loài",
+      D: "Cho biết các loài đó sống trong điều kiện giống nhau"
     },
     answer: "B"
   },
-
   {
     id: 10,
-    q: "Tính đến năm 2020, so sánh trong khối ASEAN nền kinh tế Việt Nam xếp thứ",
+    q: "Đâu không phải là cặp cơ quan tiến hóa theo hướng phân li tính trạng?",
     opts: {
-      A: "2.",
-      B: "3.",
-      C: "5.",
-      D: "4."
+      A: "Tuyến nọc độc của rắn và tuyến nước bọt của người.",
+      B: "Vòi hút của bướm và đôi hàm dưới của bọ cạp.",
+      C: "Gai xương rồng và lá cây lúa.",
+      D: "Mang cá và mang tôm"
     },
     answer: "D"
   },
-
   {
     id: 11,
-    q: "Trong giai đoạn từ năm 1986-1995, cán cân kinh tế Việt Nam có sự dịch chuyển theo hướng từ nhập siêu sang",
+    q: "Cấu tạo khác nhau của cơ quan tương đồng là do",
     opts: {
-      A: "xuất siêu.",
-      B: "phát triển.",
-      C: "khủng hoảng.",
-      D: "tái thiết."
+      A: "Sự tiến hóa trong quá trình phát triển loài",
+      B: "Chọn lọc tự nhiên đã diễn ra theo những hướng khác nhau",
+      C: "Chúng có nguồn gốc khác nhau nhưng phát triển trong các điều kiện như nhau",
+      D: "Chúng thực hiện các chức năng khác nhau."
     },
-    answer: "A"
+    answer: "B"
   },
-
   {
     id: 12,
-    q: "Tính đến năm 2023, Việt Nam đã thiết lập quan hệ ngoại giao với bao nhiêu quốc gia và vùng lãnh thổ trên thế giới?",
+    q: "Cơ quan tương tự là",
     opts: {
-      A: "191.",
-      B: "195.",
-      C: "193.",
-      D: "196."
+      A: "Những cơ quan có nguồn gốc khác nhau tuy đảm nhiệm những chức năng khác nhau nhưng vẫn có hình thái tương tự",
+      B: "Những cơ quan có nguồn gốc khác nhau nhưng đảm nhiệm những chức năng giống nhau nên có kiểu hình thái tương tự",
+      C: "Những cơ quan có nguồn gốc giống nhau nhưng đảm nhiệm những chức năng giống nhau nên có hình thái tương tự.",
+      D: "Những cơ quan có nguồn gốc khác nhau tuy đảm nhiệm những chức năng giống nhưng có hình thái khác nhau."
     },
-    answer: "C"
+    answer: "B"
   },
-
   {
     id: 13,
-    q: "Tính đến năm 2022, Việt Nam đã có bao nhiêu đối tác chiến lược?",
+    q: "Cặp cơ quan nào sau đây ở các loài sinh vật là cơ quan tương tự?",
     opts: {
-      A: "19.",
-      B: "95.",
-      C: "30.",
-      D: "16."
+      A: "Cánh chim và cánh bướm",
+      B: "Ruột thừa của người và ruột tịt ở động vật.",
+      C: "Tuyến nọc độc của rắn và tuyến nước bọt của người.",
+      D: "Chi trước của mèo và tay của người."
     },
-    answer: "C"
+    answer: "A"
   },
-
   {
     id: 14,
-    q: "Một trong những thành tựu của công cuộc Đổi mới đất nước từ năm 1986 đến nay là:",
+    q: "Cơ quan tương tự",
     opts: {
-      A: "đưa đất nước thoát khỏi khủng hoảng.",
-      B: "trở thành cường quốc số 1 của châu Á.",
-      C: "xóa thành công tình trạng tham nhũng.",
-      D: "100% công nhân có được bằng đại học."
+      A: "Thể hiện tính chọn lọc có hướng của chọn lọc tự nhiên.",
+      B: "Thể hiện chọn lọc tự nhiên thực hiện chủ yếu theo hướng phân li tính trạng",
+      C: "Thể hiện tính thống nhất của sinh giới",
+      D: "Có chủ yếu ở động vật"
     },
     answer: "A"
   },
-
   {
     id: 15,
-    q: "Một trong những thành tựu về đổi mới Chính trị, An ninh - Quốc phòng là",
+    q: "Khi nói về cơ quan tương tự, phát biểu nào sau đây không đúng.",
     opts: {
-      A: "xây dựng thành công hạm đội tàu sân bay mạnh nhất châu Á.",
-      B: "xây dựng Nhà nước pháp quyền xã hội chủ nghĩa vững mạnh.",
-      C: "tham gia đầy đủ vào các tổ chức quân sự quốc tế và khu vực.",
-      D: "trở thành ủy viên thường trực hội đồng bảo an Liên hợp quốc."
+      A: "Thể hiện sự gần gũi về tiến hóa của các loài.",
+      B: "Có chức năng như nhau.",
+      C: "Cơ quan thoái hóa không phải là cơ quan tương tự.",
+      D: "Thể hiện tính có hướng của chọn lọc tự nhiên."
     },
-    answer: "B"
+    answer: "A"
   },
-
   {
     id: 16,
-    q: "Một trong những nguyên tắc hàng đầu đặt ra cho công cuộc Đổi mới đất nước từ năm 1986 đến nay là:",
+    q: "Cơ quan thoái hoá là cơ quan",
     opts: {
-      A: "kiên định con đường xã hội chủ nghĩa.",
-      B: "không tiến hành mua các loại vũ khí.",
-      C: "tránh xung đột quân sự trên biển Đông.",
-      D: "gia nhập các tổ chức liên kết kinh tế."
+      A: "Phát triển không đầy đủ ở cơ thể trưởng thành.",
+      B: "Thay đổi cấu tạo phù hợp với chức năng mới",
+      C: "Thay đổi chức năng",
+      D: "Biến mất hoàn toàn"
     },
     answer: "A"
   },
-
   {
     id: 17,
-    q: "Đảng Cộng sản Việt Nam đã làm gì để đưa đất nước thoát khỏi tình trạng khủng hoảng trầm trọng về kinh tế - xã hội?",
+    q: "Ruột thừa ở người; hạt ngô trên bông cờ của ngô hay cây đu đủ đực có quả. Đây là bằng chứng về",
     opts: {
-      A: "Tiến hành tập thể hóa nông, công nghiệp.",
-      B: "Gia nhập vào hội đồng tương trợ kinh tế.",
-      C: "Tiến hành công cuộc Đổi mới đất nước.",
-      D: "Tiến hành chiến tranh biên giới Tây Nam."
+      A: "Cơ quan thoái hóa",
+      B: "Cơ quan tương đồng",
+      C: "Phôi sinh học",
+      D: "Cơ quan tương tự"
     },
-    answer: "C"
+    answer: "A"
   },
-
   {
     id: 18,
-    q: "Một trong những kết quả mà đổi mới về chính trị, an ninh - quốc phòng đem lại cho Việt Nam là",
+    q: "Người và tinh tinh khác nhau nhưng thành phần amino acid ở chuỗi β Hb như nhau chứng tỏ cùng một nguồn gốc thì gọi là",
     opts: {
-      A: "giữ vững sự ổn định chính trị.",
-      B: "trở thành cường quốc quân sự.",
-      C: "giành lại thành công Hoàng Sa.",
-      D: "ngân sách quốc phòng tăng lên."
+      A: "Bằng chứng sinh học phân tử",
+      B: "Bằng chứng giải phẫu so sánh",
+      C: "Bằng chứng đại lí sinh học",
+      D: "Bằng chứng phôi sinh học"
     },
     answer: "A"
   },
-
   {
     id: 19,
-    q: "Đâu là bài học kinh nghiệm xuyên suốt trong lịch sử đã đem lại thành công cho công cuộc đổi mới từ năm 1986 đến nay?",
+    q: "Bằng chứng tiến hóa nào cho thấy sự đa dạng và thích nghi của sinh giới?",
     opts: {
-      A: "Đặt lợi ích của Nhân dân lên hàng đầu.",
-      B: "Kiên trì lãnh đạo tuyệt đối của Đảng.",
-      C: "Tận dụng các cơ hội đến từ bên ngoài.",
-      D: "Tiến hành đổi mới toàn diện, đồng bộ."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 20,
-    q: "Một trong những tác động tích cực mà quá trình hội nhập kinh tế quốc tế đem đến cho Việt Nam là",
-    opts: {
-      A: "nhận chuyển giao công nghệ miễn phí.",
-      B: "được miễn thuế khi bán hàng nông sản.",
-      C: "dễ dàng tiếp cận với nguồn vốn đầu tư.",
-      D: "tiếp cận nguồn lao động giá rẻ châu Phi."
-    },
-    answer: "C"
-  },
-
-  {
-    id: 21,
-    q: "Một trong những khó khăn mà quá trình hội nhập kinh tế quốc tế đem đến cho Việt Nam là",
-    opts: {
-      A: "sự cạnh tranh quyết liệt trên thị trường.",
-      B: "bị đánh thuế cao đối với hàng nông sản.",
-      C: "khó khăn trong quá trình vận chuyển.",
-      D: "nguồn vốn được vay với lãi suất quá cao."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 22,
-    q: "Những thành tựu trong công cuộc Đổi mới đất nước từ năm 1986 đến nay chứng tỏ",
-    opts: {
-      A: "sự cần thiết phải liên kết về mặt quân sự.",
-      B: "Việt Nam trở thành cường quốc kinh tế.",
-      C: "đường lối đổi mới là đúng đắn, phù hợp.",
-      D: "kiên định con đường chủ nghĩa xã hội."
-    },
-    answer: "C"
-  },
-
-  {
-    id: 23,
-    q: "Một trong những nội dung là hạn chế của công cuộc đổi mới kinh tế đất nước từ năm 1986 đến nay là",
-    opts: {
-      A: "tình trạng mất cân đối trong ngành kinh tế.",
-      B: "lệ thuộc hoàn toàn thị trường Trung Quốc.",
-      C: "chưa tiếp cận được thị trường châu Âu.",
-      D: "chưa đưa tiến bộ khoa học vào sản xuất."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 24,
-    q: "Một trong những nội dung là hạn chế của công cuộc đổi mới văn hóa đất nước từ năm 1986 đến nay là",
-    opts: {
-      A: "chịu ảnh hưởng sâu sắc của văn minh Ấn Độ.",
-      B: "nhiều giá trị văn hóa truyền thống bị mai một.",
-      C: "còn thiếu đi một vài hệ tư tưởng chính thống.",
-      D: "văn hóa không được truyền bá ra bên ngoài."
-    },
-    answer: "B"
-  },
-
-  {
-    id: 25,
-    q: "Lực lượng nào sau đây giữ vai trò tập hợp, đoàn kết toàn thể dân tộc trong thời kỳ xây dựng và bảo vệ Tổ quốc ngày nay?",
-    opts: {
-      A: "Mặt trận Tổ quốc Việt Nam.",
-      B: "Đảng Cộng sản Việt Nam.",
-      C: "Giáo hội Phật giáo Việt Nam.",
-      D: "Đội tuyển quốc gia Việt Nam."
-    },
-    answer: "A"
-  },
-
-  {
-    id: 26,
-    q: "Nhân tố quyết định đến sự thành công của công cuộc Đổi mới đất nước từ năm 1986 đến nay là:",
-    opts: {
-      A: "những bài học từ Liên Xô và Trung Quốc.",
-      B: "viện trợ to lớn, cần thiết từ Liên Hợp quốc.",
-      C: "Mỹ chủ động xóa bỏ bao vây và cấm vận.",
-      D: "vai trò lãnh đạo của Đảng Cộng sản Việt Nam."
+      A: "Hóa thạch",
+      B: "Phôi sinh học so sánh",
+      C: "Tế bào học và sinh học phân tử",
+      D: "Giải phẫu học so sánh"
     },
     answer: "D"
   },
-
   {
-    id: 27,
-    q: "Những thành tựu trong công cuộc Đổi mới đất nước của Việt Nam và cuộc cải cách - mở cửa của Trung Quốc đều có ý nghĩa nào sau đây?",
+    id: 20,
+    q: "Bằng chứng tiến hóa nào là phù hợp nhất để sử dụng giải thích nguồn gốc tổ tiên chung của các loài trên trái đất?",
     opts: {
-      A: "Nâng cao vị thế đất nước trên trường quốc tế.",
-      B: "Trở thành ủy viên thường trực hội đồng bảo an.",
-      C: "Thu nhập quốc dân đạt mức trên 1000 tỷ đô la.",
-      D: "Buộc Mỹ rút các căn cứ quân sự gần biên giới."
+      A: "Bằng chứng giải phẫu so sánh",
+      B: "Hóa thạch",
+      C: "Cơ quan tương đồng",
+      D: "Bằng chứng tế bào học và sinh học phân tử"
+    },
+    answer: "D"
+  },
+  {
+    id: 21,
+    q: "Sự giống nhau nào trong các bằng chứng tiến hóa sau không được quy định bởi sự giống nhau về kiểu gene:",
+    opts: {
+      A: "Các cơ quan thoái hóa.",
+      B: "Các cơ quan tương đồng.",
+      C: "Sự giống nhau của các cơ quan tương tự.",
+      D: "Cơ quan tương đồng và cơ quan thoái hóa."
+    },
+    answer: "C"
+  },
+  {
+    id: 22,
+    q: "Cơ quan thoái hóa mặc dù không có chức năng gì nhưng vẫn tồn tại trên cơ thể có thể là do:",
+    opts: {
+      A: "Các gene quy định cơ quan thoái hóa là những gen lặn.",
+      B: "Vì chúng ít có hại cho cơ thể sinh vật nên không bị CLTN loại bỏ.",
+      C: "Chưa đủ thời gian tiến hóa để CLTN có thể loại bỏ chúng.",
+      D: "Có thể chúng sẽ trở nên có ích trong tương lai nên không bị loại bỏ."
+    },
+    answer: "B"
+  },
+  {
+    id: 23,
+    q: "Cặp cơ quan nào dưới đây là cơ quan tương đồng?",
+    opts: {
+      A: "Đuôi cá mập và đuôi cá voi.",
+      B: "Ngà voi và sừng tê giác.",
+      C: "Vòi voi và vòi bạch tuộc",
+      D: "Cánh dơi và tay người."
+    },
+    answer: "D"
+  },
+  {
+    id: 24,
+    q: "Ví dụ nào sau đây thuộc bằng chứng sinh học phân tử?",
+    opts: {
+      A: "Xác sinh vật sống trong các thời đại trước được bảo quản trong các lớp băng.",
+      B: "Protein của các loài sinh vật đều cấu tạo từ 20 loại amino acid.",
+      C: "Xương tay của người tương đồng với chi trước của mèo.",
+      D: "Tất cả các loài sinh vật đều được cấu tạo từ tế bào."
+    },
+    answer: "B"
+  },
+  {
+    id: 25,
+    q: "Cánh của dơi và cánh của côn trùng có cấu trúc khác nhau nhưng chức năng lại giống nhau. Đây là bằng chứng về:",
+    opts: {
+      A: "Cơ quan tương đồng.",
+      B: "Cơ quan tương ứng.",
+      C: "Cơ quan tương tự.",
+      D: "Cơ quan thoái hoá."
+    },
+    answer: "C"
+  },
+  {
+    id: 26,
+    q: "Bằng chứng nào sau đây được xem là bằng chứng tiến hóa trực tiếp?",
+    opts: {
+      A: "Bộ xương của người Việt Cổ đã được tìm thấy trong các lớp đất ở Chùa Sò – xã Thạch Lạc có niên đại hơn 4 ngàn năm.",
+      B: "Các amino acid trong chuỗi β-hemoglobin của người và tinh tinh giốngnhau.",
+      C: "Tất cả sinh vật từ đơn bào đến đa bào đều được cấu tạo từ tế bào.",
+      D: "Chi trước của mèo và cánh của dơi có các xương phân bố theo thứ tự tương tự nhau."
     },
     answer: "A"
   },
-
   {
-    id: 28,
-    q: "Một trong những nội dung là điểm khác biệt của chính sách đối ngoại trước và sau công cuộc đổi mới đất nước ở Việt Nam là:",
+    id: 27,
+    q: "Cơ quan tương tự ở các loài khác nhau có đặc điểm nào sau đây?",
     opts: {
-      A: "muốn nâng cao vị thế đất nước.",
-      B: "coi trọng mối quan hệ với Lào.",
-      C: "thái độ và chính sách với Mỹ.",
-      D: "kiên trì sự lãnh đạo của Đảng."
+      A: "Có chức năng hoàn toàn khác nhau.",
+      B: "Là bằng chứng tiến hoá trực tiếp.",
+      C: "Không được bắt nguồn từ một nguồn gốc",
+      D: "Là bằng chứng tế bào học."
     },
     answer: "C"
+  },
+  {
+    id: 28,
+    q: "Phát biểu nào sau đây đúng về hoá thạch?",
+    opts: {
+      A: "Hoá thạch cung cấp những bằng chứng gián tiếp về lịch sử tiến hoá của sinh giới.",
+      B: "Phân tích đồng vị phóng xạ carbon 14 (14C) để xác định tuổi của hoá thạch lên đến hàng tỉ năm.",
+      C: "Các hoá thạch không cung cấp bằng chứng về mối quan hệ họ hàng giữa các loài sinh vật.",
+      D: "Qua xác định tuổi các hoá thạch, có thể xác định loài nào xuất hiện trước, loài nào xuất hiện sau."
+    },
+    answer: "D"
+  },
+  {
+    id: 29,
+    q: "Vây cá mập là cơ quan di chuyển của lớp cá vây; vây cá ngư long là biến đổi chi trước của lớp bò sát; vây cá voi là biến đổi chi trước của lớp thú. Ba ví dụ trên là bằng chứng về",
+    opts: {
+      A: "Cơ quan tương tự.",
+      B: "Cơ quan thoái hóa.",
+      C: "Cơ quan tương đồng",
+      D: "Cơ quan cùng nguồn."
+    },
+    answer: "A"
+  },
+  {
+    id: 30,
+    q: "Có bao nhiêu bằng chứng tế bào học trong các bằng chứng sau?",
+    opts: {
+      A: "2",
+      B: "3",
+      C: "4",
+      D: "5"
+    },
+    answer: "B"
+  },
+  {
+    id: 31,
+    q: "Ví dụ nào sau đây không phải là cơ quan thoái hóa?",
+    opts: {
+      A: "Răng khôn ở người.",
+      B: "Manh tràng của thú ăn thịt.",
+      C: "Túi bụng của Kangguru.",
+      D: "Chi sau của thú biển."
+    },
+    answer: "C"
+  },
+  {
+    id: 32,
+    q: "Đâu không phải là bằng chứng sinh học phân tử?",
+    opts: {
+      A: "Protein của loài đều cấu tạo từ khoảng 20 loại amino acid.",
+      B: "DNA của các loài sinh vật đều đuợc cấu tạo từ 4 nucleotide.",
+      C: "Mã di truyền của đa số các loài sinh vật đều có đặc điểm giống nhau.",
+      D: "Cơ thể sống đều đuợc cấu tạo từ tế bào."
+    },
+    answer: "D"
+  },
+  {
+    id: 33,
+    q: "Để xác định quan hệ họ hàng giữa các loài sinh vật, người ta không dựa vào?",
+    opts: {
+      A: "Bằng chứng sinh học phân tử.",
+      B: "Bằng chứng phôi sinh học so sánh",
+      C: "Cơ quan tương tự.",
+      D: "Cơ quan tương đồng."
+    },
+    answer: "C"
+  },
+  {
+    id: 34,
+    q: "Bằng chứng tiến hóa nào dưới đây khác với tất cả các bằng chứng tiến hóa còn lại?",
+    opts: {
+      A: "Bằng chứng sinh học phân tử.",
+      B: "Bằng chứng phôi sinh học so sánh",
+      C: "Bằng chứng phân tử, tế bào.",
+      D: "Bằng chứng hóa thạch."
+    },
+    answer: "D"
   }
-
 ];
-  
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
