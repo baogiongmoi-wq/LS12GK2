@@ -22,10 +22,11 @@
   <main>
   
     <div class="links" style="display:flex; gap:16px; justify-content:space-between;">
-      <a class="card" style="flex:1; text-align:center;" href="BÀI10.html">BÀI 10</a>
-      <a class="card" style="flex:1; text-align:center;" href="BÀI11.html">BÀI 11</a>
-      <a class="card" style="flex:1; text-align:center;" href="BÀI12.html">BÀI 12</a>
-      <a class="card" style="flex:1; text-align:center;" href="BÀI13.html">BÀI 13</a>
+      <a class="card" style="flex:1; text-align:center;" href="BÀI10.html">BÀI 13</a>
+      <a class="card" style="flex:1; text-align:center;" href="BÀI11.html">BÀI 15</a>
+      <a class="card" style="flex:1; text-align:center;" href="BÀI12.html">BÀI 17</a>
+      <a class="card" style="flex:1; text-align:center;" href="BÀI13.html">BÀI 20</a>
+      <a class="card" style="flex:1; text-align:center;" href="BÀI21.html">BÀI 21</a>
     </div>
 
     
