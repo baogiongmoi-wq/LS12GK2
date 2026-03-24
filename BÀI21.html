@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>30 Questions</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#2b6cb0;--correct:#28a745;--wrong:#dc3545}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#1f6fb8,#2b6cb0);color:white;padding:18px 24px}
+    .container{max-width:980px;margin:18px auto;padding:18px}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(20,20,40,0.06);padding:18px}
+    h1{margin:0 0 6px;font-size:20px}
+    p.lead{margin:6px 0 16px;color:#334155}
+    .question{padding:12px;border-radius:8px;margin-bottom:10px;border:1px solid #eef2f7}
+    .qnum{font-weight:600;margin-bottom:6px}
+    .options{display:flex;gap:12px;flex-wrap:wrap}
+    label.opt{flex:1;min-width:150px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e6eef8;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#6b7280}
+    .result{margin-top:14px;padding:12px;border-radius:8px}
+    .correct{background:rgba(40,167,69,0.08);border:1px solid rgba(40,167,69,0.18);color:var(--correct)}
+    .wrong{background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.12);color:var(--wrong)}
+    .small{font-size:13px;color:#475569}
+    footer{max-width:980px;margin:20px auto;text-align:center;color:#64748b}
+    @media (max-width:700px){.options{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>TRẮC NGHIỆM BÀI 13</h1>
+      <div class="small">Điền chọn A, B, C hoặc D cho mỗi câu. Nhấn "Nộp bài" để chấm điểm và xem đáp án.</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <form id="quizForm">
+        <div id="questions"></div>
+
+        <div class="controls">
+          <button type="button" id="submitBtn">Nộp bài</button>
+          <button type="button" id="resetBtn" class="secondary">Làm lại</button>
+          <div id="score" style="margin-left:auto"></div>
+        </div>
+      </form>
+
+      <div id="feedback" style="margin-top:12px"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="small">BÀI 13: HOẠT ĐỘNG ĐỐI NGOẠI CỦA VIỆT NAM TỪ NĂM 1975 ĐỀN NAY</div>
+  </footer>
+
+  <script>
+const questionsData = [
+  {
+    id: 1,
+    q: "Quần thể là một tập hợp cá thể",
+    opts: {
+      A: "cùng loài, sống trong 1 khoảng không gian xác định, có khả năng sinh sản tạo thế hệ mới",
+      B: "khác loài, sống trong 1 khoảng không gian xác định, vào 1 thời điểm xác định",
+      C: "cùng loài, cùng sống trong 1 khoảng không gian xác định, vào 1 thời điểm xác định",
+      D: "cùng loài, cùng sống trong 1 khoảng không gian xác định, vào 1 thời điểm xác định, có khả năng sinh sản tạo thế hệ mới"
+    },
+    answer: "D"
+  },
+  {
+    id: 2,
+    q: "Quan hệ hỗ trợ giữa các cá thể trong quần thể là?",
+    opts: {
+      A: "Là mối quan hệ giữa các cá thể cùng loài hỗ trợ lẫn nhau trong các hoạt động sống.",
+      B: "Là mối quan hệ giữa các cá thể cùng loài cạnh tranh lẫn nhau trong các hoạt động sống",
+      C: "Là mối quan hệ giữa các cá thể cùng loài ăn lẫn nhau trong các hoạt động sống.",
+      D: "Là mối quan hệ giữa các cá thể cùng loài tranh giành lẫn nhau trong các hoạt động sống."
+    },
+    answer: "A"
+  },
+  {
+    id: 3,
+    q: "Hiện tượng liền rễ ở các cây thông thể hiện mối quan hệ",
+    opts: {
+      A: "hỗ trợ.",
+      B: "cạnh tranh.",
+      C: "cộng sinh.",
+      D: "hợp tác"
+    },
+    answer: "A"
+  },
+  {
+    id: 4,
+    q: "Khi nói về quan hệ hỗ trợ cùng loài, phát biểu nào sau đây sai",
+    opts: {
+      A: "Ở nhiều quần thể thực vật, những cây sống theo nhóm chịu đựng được gió bão tốt hơn những cây cùng loài sống riêng rẽ.",
+      B: "Hỗ trợ cùng loài chỉ xuất hiện khi mật độ cá thể trong quần thể tăng lên quá cao.",
+      C: "Quan hệ hỗ trợ giữa các cá thể trong quần thể đảm bảo cho quần thể tồn tại một cách ổn định và khai thác được tối ưu nguồn sống của môi trường.",
+      D: "Quan hệ hỗ trợ cùng loài thể hiện qua hiệu quả nhóm"
+    },
+    answer: "B"
+  },
+  {
+    id: 5,
+    q: "Hiện tượng cá thể tách ra khỏi nhóm nhằm:",
+    opts: {
+      A: "làm tăng khả năng cạnh tranh giữa các cá thể.",
+      B: "làm tăng mức độ sinh sản.",
+      C: "làm giảm nhẹ cạnh tranh giữa các cá thể, hạn chế sự cạn kiệt nguồn thức ăn trong vùng.",
+      D: "làm cho nguồn thức ăn cạn kiệt nhanh chóng."
+    },
+    answer: "C"
+  },
+  {
+    id: 6,
+    q: "Quan hệ cạnh tranh giữa các cá thể trong quần thể sinh vật",
+    opts: {
+      A: "Đảm bảo số lượng và sự phân bố của các cá thể trong quần thể duy trì ở mức độ phù hợp với sức chứa của môi trường.",
+      B: "Thường làm cho quần thể suy thoái đến mức diệt vong",
+      C: "Chỉ xảy ra ở các cá thể động vật, không xảy ra ở các quần thể thực vật.",
+      D: "Xuất hiện khi mật độ cá thể của quần thể xuống quá thấp"
+    },
+    answer: "A"
+  },
+  {
+    id: 7,
+    q: "Nếu mật độ của một quần thể sinh vật tăng quá mức tối đa thì:",
+    opts: {
+      A: "sự cạnh tranh giữa các cá thể trong quần thể tăng lên.",
+      B: "sự cạnh tranh giữa các cá thể trong quần thể giảm xuống.",
+      C: "sự hỗ trợ giữa các cá thể trong quần thể tăng lên.",
+      D: "sự xuất cư của các cá thể trong quần thể giảm tới mức tối thiểu."
+    },
+    answer: "A"
+  },
+  {
+    id: 8,
+    q: "Vào mùa sinh sản, các cá thể cái trong quần thể cò tranh giành nhau nơi thuận lợi để làm tổ. Đây là ví dụ về mối quan hệ",
+    opts: {
+      A: "Hỗ trợ cùng loài.",
+      B: "Cạnh tranh cùng loài.",
+      C: "Hội sinh.",
+      D: "Hợp tác."
+    },
+    answer: "B"
+  },
+  {
+    id: 9,
+    q: "Mối quan hệ nào sau đây không phải là cạnh tranh giữa các cá thể trong quần thể?",
+    opts: {
+      A: "Ó biển mổ các cá thể khác để bảo vệ lãnh thổ của mình.",
+      B: "Hải cẩu đực tranh giành cá thể cái trong mùa sinh sản.",
+      C: "Nấm men trong lên men bia cạnh tranh nhau khi nguồn dinh dưỡng giảm.",
+      D: "Giống lúa ST25 cạnh tranh dinh dưỡng với cỏ lồng vực trên ruộng."
+    },
+    answer: "D"
+  },
+  {
+    id: 10,
+    q: "Khi thiếu thức ăn, ở một số loài động vật, các cá thể trong một quần thể ăn thịt lẫn nhau. Hiện tượng này thể hiện mối quan hệ sinh thái nào sau đây?",
+    opts: {
+      A: "Cạnh tranh khác loài.",
+      B: "Kí sinh.",
+      C: "Cạnh tranh cùng loài.",
+      D: "Hội sinh."
+    },
+    answer: "C"
+  },
+  {
+    id: 11,
+    q: "Phát biểu nào sau đây đúng về mối quan hệ giữa các cá thể trong quần thể?",
+    opts: {
+      A: "Hiện tượng ăn thịt đồng loại luôn dẫn đến sự diệt vong của loài.",
+      B: "Quan hệ hỗ trợ giúp quần thể thích nghi tốt hơn với môi trường,",
+      C: "Quan hệ cạnh tranh không xảy ra ở các quần thể thực vật.",
+      D: "Sự cạnh tranh trong quần thể chỉ xảy ra khi môi trường thiếu thức ăn."
+    },
+    answer: "B"
+  },
+  {
+    id: 12,
+    q: "Trong một khu rừng, hai loài chim cùng ăn hạt trên một loài cây. Giữa hai loài chim này có mối quan hệ sinh thái nào sau đây?",
+    opts: {
+      A: "Hội sinh.",
+      B: "Cộng sinh.",
+      C: "Cạnh tranh.",
+      D: "Hợp tác."
+    },
+    answer: "C"
+  },
+  {
+    id: 13,
+    q: "Khi sống trong cùng một sinh cảnh, chung nguồn thức ăn. Để giảm bớt sự cạnh tranh, một số loài thường có xu hướng",
+    opts: {
+      A: "Một số loài tự tách ra khỏi quần thể sáp nhập vào quần thể khác.",
+      B: "Phân li ổ sinh thái.",
+      C: "Lựa chọn nơi ở mà có ít kẻ thù.",
+      D: "Phân li thành nhiều kiểu hình khác nhau."
+    },
+    answer: "B"
+  },
+  {
+    id: 14,
+    q: "Nhận định nào sau đây đúng?",
+    opts: {
+      A: "Cạnh tranh là động lực của tiến hóa.",
+      B: "Cạnh tranh làm giảm sự đa dạng sinh học do làm chết nhiều loài sinh vật.",
+      C: "Mối quan hệ cạnh tranh chỉ xảy ra đối với những loài khác nhau, không có sự cạnh tranh trong cùng một loài.",
+      D: "Cạnh tranh là hiện tượng hiếm gặp, do sinh vật luôn có xu hướng quần tụ với nhau."
+    },
+    answer: "A"
+  },
+  {
+    id: 15,
+    q: "Hình sau thể hiện mối quan hệ nào?",
+    opts: {
+      A: "Quan hệ hỗ trợ cùng loài",
+      B: "Quan hệ cạnh tranh cùng loài",
+      C: "Quan hệ ức chế cảm nhiễm",
+      D: "Hiện tượng tỉa thưa"
+    },
+    answer: "D"
+  },
+  {
+    id: 16,
+    q: "Ý nào sau đây không đúng về quan hệ cạnh tranh giữa các cá thể trong quần thể?",
+    opts: {
+      A: "Cạnh tranh cùng loài lâu dần sẽ dẫn đến phân hóa ổ sinh thái.",
+      B: "Cạnh tranh cùng loài là một trong những động lực thúc đẩy cho sự tiến hóa.",
+      C: "Cạnh tranh đôi khi chỉ xảy ra ở một giới trong loài.",
+      D: "Cạnh tranh thường xảy ra ở động vật, ít xảy ra ở thực vật."
+    },
+    answer: "D"
+  },
+  {
+    id: 17,
+    q: "Hiện tượng nào sau đây không thuộc quan hệ đấu tranh cùng loài?\n(1) Tự tỉa cành ở thực vật.\t\t(2) Ăn thịt đồng loại.\n(3) Cạnh tranh sinh học cùng loài.\t(4) Quan hệ cộng sinh.\n(5) Ức chế cảm nhiễm.",
+    opts: {
+      A: "1, 2, 3",
+      B: "4, 5",
+      C: "3, 4, 5",
+      D: "1, 3, 4, 5"
+    },
+    answer: "B"
+  },
+  {
+    id: 18,
+    q: "Tỉ lệ giới tính là?",
+    opts: {
+      A: "tỉ số giữa số lượng cá thể đực và cá thể cái trong quần thể.",
+      B: "tỉ số giữa số lượng cá thể đực trên tổng số cá thể trong quần thể.",
+      C: "tỉ số giữa số lượng cá thể cái trên tổng số cá thể trong quần thể..",
+      D: "không xác định được vì chúng thay đổi liên tục."
+    },
+    answer: "A"
+  },
+  {
+    id: 19,
+    q: "Ở một quần thể cá chép trong một hồ cá tự nhiên, sau khi khảo sát thì thấy có 10% cá thể ở tuổi trước sinh sản, 40% cá thể ở tuổi đang sinh sản, 50% cá thể ở tuổi sau sinh sản. Kết luận nào sau đây là đúng về quần thể này?",
+    opts: {
+      A: "Quần thể đang có xu hướng tăng số lượng cá thể.",
+      B: "Quần thể thuộc dạng đang suy thoái.",
+      C: "Quần thể thuộc dạng đang phát triển.",
+      D: "Quần thể có cấu trúc tuổi ổn định."
+    },
+    answer: "B"
+  },
+  {
+    id: 20,
+    q: "Một quần thể với cấu trúc 3 nhóm tuổi: trước sinh sản, đang sinh sản và sau sinh sản sẽ bị diệt vong khi mất đi nhóm",
+    opts: {
+      A: "trước sinh sản và đang sinh sản",
+      B: "trước sinh sản",
+      C: "đang sinh sản.",
+      D: "đang sinh sản và sau sinh sản"
+    },
+    answer: "A"
+  },
+  {
+    id: 21,
+    q: "Khi đánh cá, nếu đa số các mẻ lưới có cá lớn chiếm tỷ lệ nhiều thì",
+    opts: {
+      A: "Nghề cá đã rơi vào tình trạng khai thác quá mức",
+      B: "Tiếp tục đánh bắt với mức độ ít",
+      C: "Không nên tiếp tục khai thác",
+      D: "Nghề cá chưa khai thác hết tiềm năng"
+    },
+    answer: "D"
+  },
+  {
+    id: 22,
+    q: "Phân bố đồng đều giữa các cá thể trong quần thể thường gặp khi",
+    opts: {
+      A: "Điều kiện sống phân bố một cách đồng đều và có sự cạnh tranh gay gắt giữa các cá thể trong quần thể.",
+      B: "Điều kiện sống phân bố không đều và không có sự cạnh tranh gay gắt giữa các cá thể trong quần thể.",
+      C: "Điều kiện sống trong môi trường phân bố đồng đều và không có sự cạnh tranh gay gắt giữa các cá thể trong quần thể.",
+      D: "Các cá thể của quần thể sống thành bầy đàn ở những nơi có nguồn sống dồi dào nhất."
+    },
+    answer: "A"
+  },
+  {
+    id: 23,
+    q: "Về mặt sinh thái, sự phân bố đồng đều của cá thể cùng loài trong khu vực phân bố có ý nghĩa:",
+    opts: {
+      A: "Tăng khả năng khai thác nguồn sống tiềm tàng từ môi trường.",
+      B: "Tăng cường cạnh tranh nhau dẫn tới làm tăng tốc độ tiến hóa của loài.",
+      C: "Hỗ trợ lẫn nhau để chống chọi với điều kiện bất lợi của môi trường.",
+      D: "Giảm sự cạnh tranh gay gắt giữa các cá thể trong quần thể"
+    },
+    answer: "D"
+  },
+  {
+    id: 24,
+    q: "Kiểu phân bố ngẫu nhiên của các cá thể trong quần thể thường gặp khi",
+    opts: {
+      A: "Điều kiện sống phân bố không đồng đều, không có sự cạnh tranh gay gắt giữa các cá thể trong quần thể.",
+      B: "Điều kiện sống phân bố không đồng đều, có sự cạnh tranh gay gắt giữa các cá thể trong quần thể.",
+      C: "Điều kiện sống phân bố đồng đều, có sự cạnh tranh gay gắt giữa các cá thể trong quần thể.",
+      D: "Điều kiện sống phân bố đồng đều, không có sự cạnh tranh gay gắt giữa các cá thể trong quần thể."
+    },
+    answer: "D"
+  },
+  {
+    id: 25,
+    q: "Khi nói về kiểu phân bố theo nhóm của các cá thể trong quần thể, phát biểu nào sau đây đúng?",
+    opts: {
+      A: "Thường gặp khi điều kiện sống phân bố đồng đều trong môi trường.",
+      B: "Xảy ra khi có sự cạnh tranh gay gắt giữa các cá thể trong quần thể.",
+      C: "Kiểu phân bố này thường ít gặp.",
+      D: "Các cá thể hỗ trợ nhau chống lại các điều kiện bất lợi của môi trường."
+    },
+    answer: "D"
+  },
+  {
+    id: 26,
+    q: "Sự phân bố theo nhóm cá thể trong quần thể có ý nghĩa gì?",
+    opts: {
+      A: "Làm giảm sự cạnh tranh gay gắt giữa các cá thể",
+      B: "Làm tăng sự cạnh tranh gay gắt giữa các cá thể",
+      C: "Giúp sinh vật tận dụng được nguồn sống từ môi trường.",
+      D: "Giúp sinh vật hỗ trợ nhau chống chọi với bất lợi từ môi trường"
+    },
+    answer: "D"
+  },
+  {
+    id: 27,
+    q: "Trong một ao nuôi cá trắm cỏ, người ta tính được trung bình có 3 con/m2 nước. Số liệu trên cho biết về đặc trưng nào của quần thể?",
+    opts: {
+      A: "Sự phân bố cá thể.",
+      B: "Mật độ cá thể.",
+      C: "Tỷ lệ đực/cái.",
+      D: "Thành phần nhóm tuổi."
+    },
+    answer: "B"
+  },
+  {
+    id: 28,
+    q: "Mật độ của quần thể là:",
+    opts: {
+      A: "số lượng cá thể trung bình của quần thể được xác định trong một khoảng thời gian xác định nào đó.",
+      B: "số lượng cá thể cao nhất ở một thời điểm xác định nào đó trong một đơn vị diện tích nào đó của quần thể.",
+      C: "khối lượng sinh vật thấp nhất ở một thời điểm xác định trong một đơn vị thể tích của quần thể.",
+      D: "số lượng cá thể có trên một đơn vị diện tích hay thể tích của quần thể."
+    },
+    answer: "D"
+  },
+  {
+    id: 29,
+    q: "Mật độ cá thể của quần thể có ảnh hưởng tới:",
+    opts: {
+      A: "khối lượng nguồn sống trong môi trường phân bố của quần thể.",
+      B: "mức độ sử dụng nguồn sống, khả năng sinh sản và tử vong của quần thể.",
+      C: "hình thức khai thác nguồn sống của quần thể.",
+      D: "tập tính sống bầy đàn và hình thức di cư của các cá thể trng quần thể."
+    },
+    answer: "B"
+  },
+  {
+    id: 30,
+    q: "Khi nói về quan hệ giữa kích thước quần thể và kích thước cơ thể, thì câu sai là:",
+    opts: {
+      A: "loài có kích thước cơ thể nhỏ thường có kích thước quần thể lớn.",
+      B: "loài có kích thước cơ thể lớn thường có kích thước quần thể nhỏ.",
+      C: "kích thước cơ thể của loài tỉ lệ thuận với kích thước của quần thể.",
+      D: "kích thước cơ thể và kích thước quần thể của loài phù hợp với nguồn sống."
+    },
+    answer: "C"
+  },
+  {
+    id: 31,
+    q: "Cho sơ đồ các nhân tố chi phối kích thước quần thể, biết (1) là Mức sinh sản, chọn phương án đúng",
+    opts: {
+      A: "(2) là mức tử vong, (3) là mức nhập cư, (4) là mức xuất cư.",
+      B: "(4) là mức tử vong, (2) là mức nhập cư, (3) là mức xuất cư.",
+      C: "(3) là mức tử vong, (4) là mức nhập cư, (2) là mức xuất cư",
+      D: "(3) là mức tử vong, (2) là mức nhập cư, (4) là mức xuất cư"
+    },
+    answer: "D"
+  },
+  {
+    id: 32,
+    q: "Khi nguồn sống trong môi trường dồi dào, điều kiện tự nhiên thuận lợi, quần thể có trạng thái sinh lý tốt, quần thể sinh vật tăng trưởng theo :",
+    opts: {
+      A: "Đường cong hình chữ S",
+      B: "Đường cong hình chữ K.",
+      C: "Đường cong hình chữ J.",
+      D: "Tới khi số cá thể đạt mức ổn định."
+    },
+    answer: "C"
+  },
+  {
+    id: 33,
+    q: "Khi nói đến kích thước quần thể, khẳng định nào sau đây không chính xác?",
+    opts: {
+      A: "Kích thước quần thể dao động từ giá trị tối thiểu đến giá trị tối đa, và giá trị này là khác nhau giữa các loài.",
+      B: "Khi kích thước quần thể giảm xuống mức tối thiểu, khả năng sinh sản của các cá thể giảm sút.",
+      C: "Kích thước quần thể chính là khoảng không gian cần thiết để quần thể tồn tại và phát triển.",
+      D: "Kích thước quần thể đạt giá trị tối đa thì khả năng cạnh tranh giữa các cá thể trong quần thể tăng lên."
+    },
+    answer: "C"
+  },
+  {
+    id: 34,
+    q: "Quần thể sẽ tăng trưởng kích thước theo đồ thị dạng chữ J trong điều kiện:",
+    opts: {
+      A: "Khả năng cung cấp điều kiện sống không tốt, sự di cư theo mùa thường xuyên xảy ra.",
+      B: "Khả năng cung cấp điều kiện sống không tốt, hạn chế khả năng sinh sản của quần thể.",
+      C: "Khả năng cung cấp điều kiện sống đầy đủ, hoàn toàn thỏa mãn nhu cầu phát triển của quần thể.",
+      D: "Điều kiện thức ăn đầy đủ, không gian cư trú bị giới hạn gây nên sự biến động số lượng cá thể."
+    },
+    answer: "C"
+  },
+  {
+    id: 35,
+    q: "Khi kích thước quần thể xuống dưới mức tối thiểu, quần thể rơi vào trạng thái suy giảm dẫn tới diệt vong. Giải thích nào sau đây là không hợp lý?",
+    opts: {
+      A: "Số lượng cá thể quá ít nên sự giao phối gần thường xuyên xảy ra, đe dọa sự tồn tại của quần thể.",
+      B: "Sự hỗ trợ giữa các cá thể trong quần thể giảm, quần thể không có khả năng chống chọi với những thay đổi của môi trường.",
+      C: "Khả năng sinh sản giảm do cơ hội gặp nhau giữa cá thể đực và cái giảm.",
+      D: "Nguồn sống của môi trường giảm không đủ cung cấp cho nhu cầu tối thiểu của các cá thể trong quần thể."
+    },
+    answer: "D"
+  },
+  {
+    id: 36,
+    q: "Mật độ cá thể trong quần thể là nhân tố điều chỉnh:",
+    opts: {
+      A: "Kiểu phân bố của quần thể.",
+      B: "Kích thước quần thể.",
+      C: "Cấu trúc tuổi của quần thể.",
+      D: "Mối quan hệ giữa các cá thể trong quần thể."
+    },
+    answer: "B"
+  },
+  {
+    id: 37,
+    q: "Những đặc trưng của quần thể giao phối là:\n(1) Tỉ lệ giới tính.\t(2) Cấu trúc nhóm tuổi.\t(3) Sự đa dạng về thành phần loài.\n(4) Đặc trưng về mối quan hệ dinh dưỡng giữa các loài.\n(5) Kiểu phân bố.",
+    opts: {
+      A: "(1), (2), (5)",
+      B: "(1), (2), (4)",
+      C: "(2), (3), (4)",
+      D: "(2), (4), (5)"
+    },
+    answer: "A"
+  },
+  {
+    id: 38,
+    q: "Ban ngày tảo ở biển được chiếu sáng, sinh sản tăng, dẫn đến số lượng cá thể trong quần thể tăng. Nhưng khi về đêm số lượng cá thể trong quần thể giảm xuống. Ví dụ trên đề cập đến hiện tượng:",
+    opts: {
+      A: "Nhịp sinh học theo chu kì ngày đêm.",
+      B: "Biến động số lượng theo chu kì ngày đêm.",
+      C: "Biến động số lượng không theo chu kì.",
+      D: "Thường biến."
+    },
+    answer: "B"
+  },
+  {
+    id: 39,
+    q: "Tại một hồ nuôi cá người ta thấy có 2 loài cá chuyên ăn động vật nổi, một loài sống ở nơi thoáng đãng, một loài thì luôn sống nhờ các vật trôi nổi trong nước, chúng cạnh tranh gay gắt. Người ta tiến hành thả vào hồ một ít rong với mục đích chính là:",
+    opts: {
+      A: "Giảm sự cạnh tranh giữa 2 loài.",
+      B: "Tăng hàm lượng oxygen trong nước nhờ sự quang hợp của rong.",
+      C: "Rong làm nguồn thức ăn cho cá.",
+      D: "Giúp giữ độ pH của nước trong hồ ổn định."
+    },
+    answer: "A"
+  },
+  {
+    id: 40,
+    q: "Quần thể ruồi nhà thường xuất hiện nhiều vào mùa hè trong năm, còn vào thời gian khác thì hầu như giảm hẳn. Quần thể này:",
+    opts: {
+      A: "Biến động số lượng theo chu kì năm.",
+      B: "Không phải biến động số lượng.",
+      C: "Biến động số lượng theo chu kì mùa.",
+      D: "Biến động số lượng không theo chu kì."
+    },
+    answer: "C"
+  },
+  {
+    id: 41,
+    q: "Nguyên nhân của hiện tượng biến động số lượng theo chu kì là:",
+    opts: {
+      A: "Do mỗi năm lại có sự thay đổi của các loại dịch bệnh tấn công sinh vật.",
+      B: "Do những thay đổi có tính chu kì của môi trường\t.",
+      C: "Do những thay đổi có tính chu kì xảy ra hàng năm.",
+      D: "Do hoạt động của thiên tai."
+    },
+    answer: "B"
+  },
+  {
+    id: 42,
+    q: "Kiểu phân bố nào phổ biến nhất trong tự nhiên:",
+    opts: {
+      A: "Phân bố ngẫu nhiên",
+      B: "Phân bố theo nhóm",
+      C: "Phân bố đồng đều",
+      D: "Phân bố theo độ tuổi"
+    },
+    answer: "B"
+  },
+  {
+    id: 43,
+    q: "Hãy sắp xếp lại thứ tự theo kích thước quần thể lớn dần của các loài sau đây: Chó sói, chuột cống, bọ dừa, nhái bén, voi, thỏ?",
+    opts: {
+      A: "Bọ dừa, nhái bén, chuột cống, thỏ, chó sói, voi.",
+      B: "Voi, thỏ, chó sói, chuột cống, nhái bén, bọ dừa.",
+      C: "Nhái bén, chuột cống, bọ dừa, chó sói, thỏ, voi.",
+      D: "Voi, chó sói, thỏ, chuột cống, nhái bén, bọ dừa."
+    },
+    answer: "D"
+  },
+  {
+    id: 44,
+    q: "Số lượng cá thể của một loài có thể tăng hoặc giảm do sự thay đổi của các nhân tố vô sinh và hữu sinh của môi trường được gọi là hiện tượng gì?",
+    opts: {
+      A: "Phân bố cá thể",
+      B: "Kích thước của quần thể.",
+      C: "Tăng trưởng của quần thể",
+      D: "Biến động số lượng cá thể."
+    },
+    answer: "D"
+  },
+  {
+    id: 45,
+    q: "Dạng biến động số lượng cá thể nào sau đây thuộc dạng không theo chu kỳ?",
+    opts: {
+      A: "Nhiệt độ tăng đột ngột làm sâu bọ trên đồng cỏ chết hàng loạt.",
+      B: "Trung bình khoảng 7 năm cá cơm ở vùng biển Peru chết hàng loạt.",
+      C: "Số lượng tảo trên mặt nước Hồ Gươm tăng cao vào ban ngày, giảm vào ban đêm.",
+      D: "Muỗi xuất hiện nhiều vào mùa mưa, giảm vào mùa khô."
+    },
+    answer: "A"
+  },
+  {
+    id: 46,
+    q: "Nhân tố nào là nhân tố hữu sinh gây biến động số lượng cá thể của quần thể?",
+    opts: {
+      A: "Khí hậu.",
+      B: "Sự cạnh tranh giữa các cá thể trong đàn.",
+      C: "Lũ lụt.",
+      D: "Nhiệt độ xuống quá thấp."
+    },
+    answer: "B"
+  },
+  {
+    id: 47,
+    q: "Sự biến động số lượng cá thể của quần thể diễn ra theo chu kì mùa có thể do nguyên nhân nào sau đây?",
+    opts: {
+      A: "Sóng thần.",
+      B: "Khí hậu.",
+      C: "Động đất.",
+      D: "Cháy rừng."
+    },
+    answer: "B"
+  },
+  {
+    id: 48,
+    q: "Quần thể được điều chỉnh về mức cân bằng khi",
+    opts: {
+      A: "mật độ cá thể giảm xuống quá thấp hoặc tăng lên quá cao",
+      B: "môi trường sống thuận lợi, thức ăn dồi dào, ít kẻ thù",
+      C: "mật độ cá thể tăng lên quá cao dẫn đến thiếu thức ăn, nơi ở",
+      D: "mật độ cá thể giảm xuống quá thấp đe dọa sự tồn tại của quần thể"
+    },
+    answer: "A"
+  },
+  {
+    id: 49,
+    q: "Vì sao nói: “Trong tự nhiên, quần thể sinh vật có xu hướng điều chỉnh số lượng cá thể của mình ở mức cân bằng”?",
+    opts: {
+      A: "Vì mật độ cá thể của quần thể có ảnh hưởng đến mức độ sử dụng nguồn sống trong môi trường",
+      B: "Vì mật độ cá thể của quần thể có ảnh hưởng đến mức độ sử dụng nguồn sống trong môi trường, tới mức độ sinh sản và tử vong của cá thể",
+      C: "Vì mật độ cá thể của quần thể không ảnh hưởng đến mức độ sử dụng nguồn sống trong môi trường, tới mức độ sinh sản và tử vong của cá thể",
+      D: "Vì mật độ cá thể của quần thể không ảnh hưởng tới mức độ sinh sản và tử vong của cá thể"
+    },
+    answer: "B"
+  }];
+  
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+shuffleArray(questionsData);
+
+const container = document.getElementById('questions');
+
+questionsData.forEach((item, index) => {
+  const qNumber = index + 1;
+
+  const div = document.createElement('div');
+  div.className = 'question';
+  div.id = 'q' + qNumber;
+
+  div.innerHTML = `
+    <div class="qnum">Câu ${qNumber}:</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options">
+      ${Object.entries(item.opts).map(([key, val]) => `
+        <label class="opt">
+          <input type="radio" name="q${qNumber}" value="${key}">
+          <strong>${key}.</strong> ${val}
+        </label>
+      `).join('')}
+    </div>
+  `;
+
+  container.appendChild(div);
+});
+
+
+  // grading logic
+  const submitBtn = document.getElementById('submitBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const scoreDiv = document.getElementById('score');
+  const feedbackDiv = document.getElementById('feedback');
+
+  submitBtn.addEventListener('click', ()=>{
+  let correctCount = 0;
+  let total = questionsData.length;
+
+  for(let i=0;i<total;i++){
+    const qNumber = i + 1;
+    const selected = document.querySelector(`input[name="q${qNumber}"]:checked`);
+    const qDiv = document.getElementById('q'+qNumber);
+
+    qDiv.classList.remove('correct','wrong');
+    const old = qDiv.querySelector('.note'); if(old) old.remove();
+
+    const note = document.createElement('div');
+    note.className = 'note small';
+
+    if(!selected){
+      note.textContent = '(Chưa trả lời)';
+      qDiv.appendChild(note);
+      continue;
+    }
+
+    if(selected.value === questionsData[i].answer){
+      correctCount++;
+      qDiv.classList.add('correct');
+      note.textContent = `Đúng — đáp án: ${questionsData[i].answer}`;
+    } else {
+      qDiv.classList.add('wrong');
+      note.textContent = `Sai — đáp án đúng: ${questionsData[i].answer}`;
+    }
+
+    qDiv.appendChild(note);
+  }
+
+  scoreDiv.innerHTML = `<strong>Kết quả: ${correctCount}/${total}</strong>`;
+  submitBtn.disabled = true;
+});
+
+  resetBtn.addEventListener('click', ()=>{
+    document.getElementById('quizForm').reset();
+    // clear highlights/notes
+    for(let i=1;i<=questionsData.length;i++){
+      const qDiv = document.getElementById('q'+i);
+      qDiv.classList.remove('correct','wrong');
+      const note = qDiv.querySelector('.note'); if(note) note.remove();
+      const un = qDiv.querySelector('.small'); if(un) un.remove();
+    }
+    scoreDiv.innerHTML='';
+    feedbackDiv.innerHTML='';
+    submitBtn.disabled = false;
+  });
+  </script>
+</body>
+</html>
